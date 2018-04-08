@@ -4,11 +4,61 @@
     <title>UniqueInnovators</title>
     <%= csrf_meta_tags %>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <img alt="Unique Innovators" src="#">
+          </a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Home", welcome_index_path %></li>
+          <li><%= link_to "About", welcome_about_path %></li>
+        </ul>
+        <% unless user_signed_in? %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Sign In", new_user_session_path %></li>
+            <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          </ul>
+        <% else %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Welcome, #{current_user.email}!", edit_user_registration_path %></li>
+            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+          </ul>
+       <% end %>
+      </div>
+    </nav>
+
+    <div class="container">
+      <% if flash[:alert] %>
+        <div class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= alert %>
+        </div>
+      <% elsif flash[:notice] %>
+        <div class="alert alert-success">
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if current_user %>
+        <% unless params[:controller] == "devise/confirmations" %>
+          <% if current_user.requires_confirmation? %>
+            <div class="alert alert-info">
+              <p>Please check your email (<%= current_user.email %>) to confirm your account! <%= link_to "Resend", new_user_confirmation_path, style: "text-decoration: underline;" %></p>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <%= yield %>
+    </div>
+
   </body>
 </html>
