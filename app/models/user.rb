@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
 
+   has_many :gigs
+
    def requires_confirmation?
      if confirmed?
        false

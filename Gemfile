@@ -22,6 +22,9 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'rails-controller-testing'
+  gem 'shoulda'
+  gem 'ffaker'
+  gem 'factory_bot_rails'
 end
 
 # Use Puma as the app server
@@ -45,6 +48,8 @@ gem 'bootstrap-sass'
 gem 'devise'
 
 gem 'figaro'
+
+gem 'geocoder'
 
 group :development do
   gem 'listen', '~> 3.0.5'

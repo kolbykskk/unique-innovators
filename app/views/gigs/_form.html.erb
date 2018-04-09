@@ -1,0 +1,29 @@
+<%= form_for @gig do |f| %>
+  <div class="form-group">
+    <%= f.label :category %>
+    <%= f.select :category, ['a', 'b', 'c'], class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control', placeholder: "Enter a title for your gig - e.g. Web Developer" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: 'form-control', placeholder: "Enter a description for your gig - Include as many details as possible" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :delivery_time %>
+    <%= f.select :delivery_time, delivery_time, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :allow %>
+    <%= f.select :type, ["Online or Meetups", "Online Only", "Meetups Only"], class:"form-control"%>
+  </div>
+  <div class="form-group location-form-group">
+    <%= f.label :location %>
+    <%= f.text_field :location, class:"form-control", placeholder: "Start typing your location..." %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Create Gig", class:"btn btn-info" %>
+  </div>
+<% end %>
