@@ -8,4 +8,10 @@ def delivery_time
   arr
 end
 
+def list_of_categories
+  arr = []
+  arr.push('Graphics & Design', 'Digital Marketing', 'Writing & Translation', 'Video & Animation', 'Music & Audio', 'Programming & Tech', 'Business', 'Fun & Lifestyle', 'Sports & Fitness', 'Photographer', 'Model')
+  arr
+end
+
 end

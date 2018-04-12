@@ -1,2 +1,2 @@
-<h1>Gigs#edit</h1>
-<p>Find me in app/views/gigs/edit.html.erb</p>
+<h1 class="page-header">Edit Gig: <%= @gig.title %></h1>
+<%= render partial: 'form', locals: { submit_button: "Update Gig", form_config: @gig } %>

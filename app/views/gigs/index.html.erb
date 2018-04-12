@@ -1,2 +1,14 @@
-<h1>Gigs#index</h1>
-<p>Find me in app/views/gigs/index.html.erb</p>
+<%= link_to "Post a Gig", new_user_gig_path(current_user), class: 'btn btn-sm btn-success', 'data-turbolinks': false %>
+<div class="row">
+<% @gigs.each do |gig| %>
+  <div class="col-md-4">
+    <div class="gig-card">
+    <h4><b><%= link_to "#{gig.title}", gig %></b></h4>
+      <div class="pull-right">
+        <small><b>Available:</b> <%= gig.allow %></small><br>
+        <small><b>Location:</b> <%= gig.location %></small>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>

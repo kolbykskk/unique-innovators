@@ -1,3 +1,105 @@
 // Place all the styles related to the Gigs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  background-color: #F9F9F9 !important;
+}
+
+.gig-description {
+  font-size: 18px;
+  padding: 10px;
+  line-height: 25px;
+  word-wrap: break-word;
+}
+
+.breadcrumb {
+  background-color: #FFD381 !important;
+}
+
+.breadcrumb > li + li::before {
+  color: #f9f9f9 !important;
+}
+
+.gig-owner-bar {
+  padding: 15px;
+}
+
+.inside {
+  background-color: white;
+  box-shadow: 1px 1px gray;
+  padding: 15px;
+}
+
+.gig-card {
+  background-color: white;
+  box-shadow: 0 0 1px grey;
+  padding: 15px;
+  margin-bottom: 15px;
+  height: 200px;
+}
+
+.gig-main {
+  margin-bottom: 15px;
+}
+
+.desc {
+  margin-top: 15px;
+}
+
+.gig-title {
+  font-weight: bold;
+}
+
+.gig-header {
+  word-wrap: break-word;
+}
+
+.gig-map {
+  margin-bottom: 15px;
+}
+
+.gig-gravatar {
+  border-radius: 75px;
+}
+
+.carousel-inner {
+  max-height: 360px;
+}
+
+.carousel-inner > .item > img {
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.carousel-inner > .item > video {
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.playpause {
+    background-image:url(https://image.ibb.co/dt3icH/right_arrow.png);
+    background-repeat:no-repeat;
+    width:20%;
+    height:20%;
+    position:absolute;
+    left:0%;
+    right:0%;
+    top:0%;
+    bottom:0%;
+    margin:auto;
+    background-size:contain;
+    background-position: center;
+}
+
+#map {
+  height: 300px;
+}
+
+.rating {
+  color: gold;
+}
+
+.gig-user {
+  text-align: center;
+}

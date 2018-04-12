@@ -20,3 +20,20 @@
 .navbar-default {
   background-color: #FFD381 !important;
 }
+
+html,body {
+  height: 100%;
+  margin-bottom: 600px;
+}
+
+.img-circular{
+ border-radius: 100px;
+ -webkit-border-radius: 100px;
+ -moz-border-radius: 100px;
+}
+
+.img-circular {
+  height: 35px;
+  line-height: 35px;
+  vertical-align: middle;
+}

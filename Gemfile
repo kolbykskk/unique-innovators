@@ -51,6 +51,12 @@ gem 'figaro'
 
 gem 'geocoder'
 
+gem 'carrierwave', '~> 1.0'
+
+gem 'carrierwave-video'
+
+gem 'rmagick'
+
 group :development do
   gem 'listen', '~> 3.0.5'
 end

@@ -1,0 +1,25 @@
+<% @gig.gallery.each_with_index do |gal, i| %>
+  <% if i == 0 %>
+    <% if gal.to_s.exclude?("mp4") %>
+      <div class="item active">
+        <%= image_tag gal.url.to_s %>
+      </div>
+    <% else %>
+      <div class="item active">
+        <%= video_tag gal.url.to_s, class: 'video' %>
+        <div class="playpause"></div>
+      </div>
+    <% end %>
+  <% else %>
+    <% if gal.to_s.exclude?("mp4") %>
+      <div class="item">
+        <%= image_tag gal.url.to_s %>
+      </div>
+    <% else %>
+      <div class="item">
+        <%= video_tag gal.url.to_s, class: 'video' %>
+        <div class="playpause"></div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

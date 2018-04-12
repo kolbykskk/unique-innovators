@@ -1,7 +1,17 @@
-<%= form_for @gig do |f| %>
+<%= form_for form_config do |f| %>
+  <% if @gig.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@gig.errors.count, "error") %>.</h4>
+      <ul>
+        <% @gig.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="form-group">
     <%= f.label :category %>
-    <%= f.select :category, ['a', 'b', 'c'], class: 'form-control' %>
+    <%= f.select :category, list_of_categories, class: 'form-control' %>
   </div>
   <div class="form-group">
     <%= f.label :title %>
@@ -17,13 +27,17 @@
   </div>
   <div class="form-group">
     <%= f.label :allow %>
-    <%= f.select :type, ["Online or Meetups", "Online Only", "Meetups Only"], class:"form-control"%>
+    <%= f.select :allow, ["Online or Meetups", "Online Only", "Meetups Only"], class:"form-control"%>
+  </div>
+  <div class="form-group">
+    <%= f.label :gallery, "Gallery (CTRL + CLICK to select multiple images)" %>
+    <%= f.file_field :gallery, multiple: true %>
   </div>
   <div class="form-group location-form-group">
     <%= f.label :location %>
     <%= f.text_field :location, class:"form-control", placeholder: "Start typing your location..." %>
   </div>
   <div class="form-group">
-    <%= f.submit "Create Gig", class:"btn btn-info" %>
+    <%= f.submit submit_button, class:"btn btn-info" %>
   </div>
 <% end %>

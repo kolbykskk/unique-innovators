@@ -10,20 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409072848) do
+ActiveRecord::Schema.define(version: 20180411062756) do
 
   create_table "gigs", force: :cascade do |t|
     t.string "title"
     t.string "category"
     t.string "location"
-    t.string "description"
+    t.text "description"
     t.string "delivery_time"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
-    t.string "type"
+    t.string "allow"
+    t.string "gallery"
     t.index ["user_id"], name: "index_gigs_on_user_id"
   end
 
