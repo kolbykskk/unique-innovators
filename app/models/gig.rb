@@ -1,12 +1,13 @@
 class Gig < ApplicationRecord
 
   belongs_to :user
-  mount_uploaders :gallery, GalleryUploader
 
+  mount_uploaders :gallery, GalleryUploader
   serialize :gallery, JSON
-  geocoded_by :location
-  before_validation :geocode
   validate :gallery_count
+
+  geocoded_by :location
+  after_validation :geocode
 
   validates :title, length: { in: 3..75 }, presence: true
   validates :description, length: { in: 50..1000 }, presence: true

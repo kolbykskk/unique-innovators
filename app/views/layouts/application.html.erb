@@ -5,10 +5,9 @@
     <%= csrf_meta_tags %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjbcZiWF7waJt5NkAYWxvr06JKJWVNaJc&libraries=places"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
 
@@ -64,6 +63,6 @@
 
       <%= yield %>
     </div>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjbcZiWF7waJt5NkAYWxvr06JKJWVNaJc&libraries=places" async defer></script>
   </body>
 </html>

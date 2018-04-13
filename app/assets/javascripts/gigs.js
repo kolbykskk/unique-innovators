@@ -1,7 +1,6 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
-
-$(document).on('turbolinks:load', function() {
+$(document).ready(function() {
 
   if (($(".gigs.new").length > 0) || ($(".gigs.edit").length > 0)) {
     //Javascript for google places api, autocomplete

@@ -37,7 +37,7 @@ class GigsController < ApplicationController
 
     if @gig.destroy
       flash[:notice] = "\"#{@gig.title}\" was deleted successfully"
-      redirect_to gig_path
+      redirect_to gigs_path
     else
       flash[:alert] = "An error occurred. \"#{@gig.title}\" could not be deleted."
       redirect_to @gig
@@ -46,12 +46,20 @@ class GigsController < ApplicationController
 
   def show
     @gig = Gig.find(params[:id])
-    @lat = @gig.latitude
-    @lng = @gig.longitude
   end
 
   def index
-    @gigs = Gig.all
+    if params[:location].present?
+      begin
+        @gigs = Gig.where("title LIKE ? AND location LIKE ?", "%#{params[:search]}%", "%#{Gig.near(params[:location], params[:radius] || 50)[0].location}%")
+        flash.clear
+      rescue NoMethodError => e
+        @gigs = Gig.where("title LIKE ?", "%#{params[:search]}%")
+        flash[:alert] = "Could not find gigs within that location/radius. Searching for your search term instead."
+      end
+    else
+      @gigs = Gig.where("title LIKE ?", "%#{params[:search]}%")
+    end
   end
 
   private

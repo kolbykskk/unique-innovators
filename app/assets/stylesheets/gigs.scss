@@ -6,13 +6,6 @@ body {
   background-color: #F9F9F9 !important;
 }
 
-.gig-description {
-  font-size: 18px;
-  padding: 10px;
-  line-height: 25px;
-  word-wrap: break-word;
-}
-
 .breadcrumb {
   background-color: #FFD381 !important;
 }
@@ -21,30 +14,57 @@ body {
   color: #f9f9f9 !important;
 }
 
+.gig-description {
+  font-size: 18px;
+  padding: 10px;
+  line-height: 25px;
+  word-wrap: break-word;
+}
+
 .gig-owner-bar {
   padding: 15px;
 }
 
-.inside {
-  background-color: white;
-  box-shadow: 1px 1px gray;
+.post-a-gig {
   padding: 15px;
 }
 
-.gig-card {
+.index-image {
+  background-color: white;
+  overflow: hidden;
+  height: 150px;
+  width: 100%;
   background-color: white;
   box-shadow: 0 0 1px grey;
-  padding: 15px;
+}
+
+.act-image {
+  object-fit: cover;
+  min-height: 150px;
+}
+
+.index-title {
+  word-wrap: break-word;
+}
+
+.index-title a {
+  color: black !important;
+}
+
+.index-user {
+  margin-bottom: 12px;
+}
+
+.index-card {
+  background-color: white;
+  box-shadow: 0 0 1px grey;
+  height: 210px;
   margin-bottom: 15px;
-  height: 200px;
+  padding: 15px;
 }
 
 .gig-main {
   margin-bottom: 15px;
-}
-
-.desc {
-  margin-top: 15px;
 }
 
 .gig-title {
@@ -63,8 +83,22 @@ body {
   border-radius: 75px;
 }
 
-.carousel-inner {
-  max-height: 360px;
+.gig-user {
+  text-align: center;
+}
+
+.rating {
+  color: gold;
+}
+
+.inside {
+  background-color: white;
+  box-shadow: 1px 1px gray;
+  padding: 15px;
+}
+
+.desc {
+  margin-top: 15px;
 }
 
 .carousel-inner > .item > img {
@@ -94,12 +128,4 @@ body {
 
 #map {
   height: 300px;
-}
-
-.rating {
-  color: gold;
-}
-
-.gig-user {
-  text-align: center;
 }

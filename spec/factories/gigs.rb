@@ -6,6 +6,7 @@ FactoryBot.define do
     delivery_time '1 day'
     location FFaker::Address.city
     allow 'Online or Meetups'
+    gallery ["test.png"]
     user
   end
 end
