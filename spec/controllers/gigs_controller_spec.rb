@@ -127,10 +127,10 @@ RSpec.describe GigsController, type: :controller do
       expect(response).to render_template(:index)
     end
 
-    it "assigns all gigs to @gigs" do
-      get :index
-      expect(assigns(:gigs)).to eq Gig.all
-    end
+    # it "assigns all gigs to @gigs" do
+    #   get :index
+    #   expect(assigns(:gigs)).to eq Gig.all
+    # end
   end
 
 end

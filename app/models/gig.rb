@@ -1,13 +1,14 @@
 class Gig < ApplicationRecord
 
   belongs_to :user
+  has_many :favorites, dependent: :destroy
 
   mount_uploaders :gallery, GalleryUploader
   serialize :gallery, JSON
   validate :gallery_count
 
   geocoded_by :location
-  after_validation :geocode
+  after_validation :geocode, if: ->(obj){ obj.location.present? and obj.location_changed? }
 
   validates :title, length: { in: 3..75 }, presence: true
   validates :description, length: { in: 50..1000 }, presence: true

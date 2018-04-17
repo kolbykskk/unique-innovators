@@ -1,0 +1,40 @@
+<div class="seller col-md-10">
+  <h3 class="page-header"><b>
+    Your gigs (<%= @gigs.count %>)
+  </b></h3>
+  <div class="row" style="overflow: auto; white-space: nowrap;">
+    <% @gigs.each do |gig| %>
+      <div class="col-md-4 col-sm-8 col-xs-12" style="display: inline-block; float: none;">
+        <%= link_to gig do %>
+          <div class="index-image">
+            <% if gig.gallery[0].to_s.exclude?("mp4") %>
+              <%= image_tag gig.gallery[0], width: '100%', class: 'act-image' %>
+            <% else %>
+              <%= video_tag gig.gallery[0], width: '100%', class: 'act-image' %>
+            <% end %>
+          </div>
+        <% end %>
+          <div class="index-card">
+            <div class="index-user">
+              <%= image_tag gig.user.avatar_url(28), class: 'gig-gravatar' %>
+              <%= gig.user.username %>
+              <div class="rating pull-right">
+                <% 5.times do %>
+                  <i class="fas fa-bolt"></i>
+                <% end %>
+                <p style="color: black; display: inline;">(5)</p>
+              </div>
+            </div>
+            <div style="overflow: hidden;"><p class="index-title"><%= link_to "#{gig.title}", gig %></p></div>
+          <% unless gig.allow == "Online Only" %>
+            <i class="fas fa-map-marker-alt"></i> <%= gig.location %>
+          <% else %>
+          <i class="fas fa-map-marker-alt"></i> Online Only, No Meetups
+          <% end %>
+          <hr>
+          <h3><b>$50</b></h3>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

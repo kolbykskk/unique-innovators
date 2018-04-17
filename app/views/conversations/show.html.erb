@@ -1,0 +1,60 @@
+<div class="row">
+
+<div class="col-md-4">
+  <div class="page-header conversations1-header">
+    <%= link_to "New Conversation", new_conversation_path, class: 'btn btn-sm btn-info pull-right' %>
+    <h3><b>All Conversations</b></h3>
+  </div>
+
+  <div style="overflow-y: scroll; overflow-x: hidden; height:400px; margin-bottom:20px;">
+    <% @conversations.each do |conversation| %>
+      <div class="row">
+        <div class="col-md-10">
+          <div class="conversations1">
+            <%= link_to conversation.subject, conversation_path(conversation) %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+  <div class="col-md-8 messages1">
+    <div class="page-header">
+      <h3><b>Subject: <%= @conversation.subject %></b></h3>
+    </div>
+
+    <div id="message-scroll" style="overflow-y: scroll; height:400px; margin-bottom:20px;">
+      <% @conversation.receipts_for(current_user).each do |receipt| %>
+        <div>
+          <small style="color: #267ECA;" class="pull-right"><%= time_ago_in_words(receipt.created_at) %> ago</small>
+          <% unless receipt.message.sender == current_user %>
+            <small style="color: #267ECA;"><%= receipt.message.sender.username %>:</small>
+          <% else %>
+            <small style="color: #267ECA;">You:</small>
+          <% end %>
+          <p><%= receipt.message.body %></p>
+        </div>
+      <% end %>
+    </div>
+
+    <%= form_tag conversation_messages_path(@conversation), method: :post do %>
+      <div class="form-group">
+        <%= text_field :body, nil, class: 'form-control', required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= submit_tag "Send Message", class: 'btn btn-info form-control send_message_btn' %>
+      </div>
+    <% end %>
+
+  </div>
+
+</div>
+
+<script>
+$(document).on('turbolinks:load', function() {
+  var objDiv = document.getElementById("message-scroll");
+  objDiv.scrollTop = objDiv.scrollHeight;
+});
+</script>

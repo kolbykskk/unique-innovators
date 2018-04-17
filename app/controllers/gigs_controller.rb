@@ -1,4 +1,7 @@
 class GigsController < ApplicationController
+
+  before_action :authenticate_user!, except: [:index, :show]
+
   def new
     @gig = Gig.new
   end
@@ -51,14 +54,16 @@ class GigsController < ApplicationController
   def index
     if params[:location].present?
       begin
-        @gigs = Gig.where("title LIKE ? AND location LIKE ?", "%#{params[:search]}%", "%#{Gig.near(params[:location], params[:radius] || 50)[0].location}%")
-        flash.clear
+        @gigs = Gig.where("title LIKE ? AND location LIKE ?", "%#{params[:search]}%", "#{Gig.near(params[:location], params[:radius] || 50)[0].location}").page(params[:page]).per(15)
       rescue NoMethodError => e
-        @gigs = Gig.where("title LIKE ?", "%#{params[:search]}%")
-        flash[:alert] = "Could not find gigs within that location/radius. Searching for your search term instead."
+        @gigs = Gig.where("title LIKE ?", "%#{params[:search]}%").page(params[:page]).per(15)
+        flash[:alert] = "No gigs were found with that location. Showing results for your search term instead."
+      rescue ArgumentError => e
+        sleep 2
+        retry
       end
     else
-      @gigs = Gig.where("title LIKE ?", "%#{params[:search]}%")
+      @gigs = Gig.where("title LIKE ?", "%#{params[:search]}%").page(params[:page]).per(15)
     end
   end
 

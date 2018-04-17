@@ -1,0 +1,32 @@
+<div class="col-md-2">
+<ul class="nav nav-pills nav-stacked">
+  <li role="presentation" class="show-buyer"><a>Buyer Dashboard</a></li>
+  <li role="presentation" class="show-seller"><a>Seller Dashboard</a></li>
+</ul>
+</div>
+
+
+<%= render partial: 'dashboard_favorites' %>
+<%= render partial: 'dashboard_gigs' %>
+
+<script>
+$(document).on('turbolinks:load', function() {
+  $('.seller').hide();
+  $('.buyer').show();
+  $('.show-buyer').addClass('active');
+});
+
+$('.show-seller').click(function() {
+  $('.buyer').hide();
+  $('.seller').show();
+  $('.show-seller').addClass('active');
+  $('.show-buyer').removeClass('active');
+});
+
+$('.show-buyer').click(function() {
+  $('.seller').hide();
+  $('.buyer').show();
+  $('.show-seller').removeClass('active');
+  $('.show-buyer').addClass('active');
+});
+</script>

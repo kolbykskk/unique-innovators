@@ -25,7 +25,7 @@ body {
   padding: 15px;
 }
 
-.post-a-gig {
+.search-text {
   padding: 15px;
 }
 
@@ -44,7 +44,10 @@ body {
 }
 
 .index-title {
-  word-wrap: break-word;
+  width: 325px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .index-title a {
@@ -128,4 +131,8 @@ body {
 
 #map {
   height: 300px;
+}
+
+.search-form {
+  text-align: center;
 }

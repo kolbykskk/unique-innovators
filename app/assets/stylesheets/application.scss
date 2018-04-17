@@ -17,22 +17,136 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+.show-buyer {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.show-seller {
+  cursor: pointer;
+}
+
 .navbar-default {
-  background-color: #FFD381 !important;
+  background-color: white;
 }
 
-html,body {
-  height: 100%;
+.navbar-nav li a {
+  line-height: 75px;
 }
 
-.img-circular{
- border-radius: 100px;
- -webkit-border-radius: 100px;
- -moz-border-radius: 100px;
+.navbar-nav .dropdown li a {
+  line-height: 105px;
 }
 
-.img-circular {
-  height: 35px;
-  line-height: 35px;
-  vertical-align: middle;
+.navbar {
+  margin-bottom: 0;
+}
+
+.navbar-nav .dropdown .dropdown-menu li a {
+  line-height: 20px !important;
+}
+
+.nav-username {
+  text-align: center;
+  padding: 5px;
+  padding-bottom: 15px;
+}
+
+@media (max-width: 767px) {
+    .navbar-nav > li > a {
+    line-height: 20px;
+  }
+
+  .navbar-header {
+    height: 105px;
+  }
+
+  .navbar-toggle {
+    margin-top: 35px;
+  }
+}
+
+.nav-avatar {
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+}
+
+#notice_wrapper {
+  width: 100%;
+  z-index: 999;
+  background: rgba(0, 128, 0, 0.85);
+}
+
+#notice_wrapper_alert {
+  width: 100%;
+  z-index: 999;
+  background: rgba(255, 0, 0, 0.85);
+}
+
+#notice_wrapper_info {
+  width: 100%;
+  z-index: 999;
+  background: rgba(2, 105, 194, 0.85);
+  margin-bottom: 20px;
+}
+
+.notice {
+  padding: 1rem 0;
+  text-align: center;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.alert {
+  padding: 1rem 0;
+  text-align: center;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.info {
+  padding: 1rem 0;
+  text-align: center;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.info p {
+  margin: 0;
+}
+
+.resend {
+  text-decoration: underline;
+  color: white;
+}
+
+.btn-info {
+  background-color: #267ECA;
+  border-color: #267ECA;
+}
+
+.btn-info:hover {
+  background-color: #23527C;
+  border-color: #23527C;
+}
+
+.conversations1 {
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 0 1px grey;
+  margin-bottom: 5px;
+}
+
+.conversations1-header {
+  margin-bottom: 20px;
 }

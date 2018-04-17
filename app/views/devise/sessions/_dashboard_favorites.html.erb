@@ -1,0 +1,40 @@
+<div class="buyer col-md-10">
+  <h3 class="page-header"><b>
+    Your favorited gigs (<%= @favorites.count %>)
+  </b></h3>
+  <div class="row" style="overflow: auto; white-space: nowrap;">
+    <% @favorites.each do |favorite| %>
+      <div class="col-md-4 col-sm-8 col-xs-12" style="display: inline-block; float: none;">
+        <%= link_to Gig.where(id: favorite.gig_id)[0] do %>
+          <div class="index-image">
+            <% if Gig.where(id: favorite.gig_id)[0].gallery[0].to_s.exclude?("mp4") %>
+              <%= image_tag Gig.where(id: favorite.gig_id)[0].gallery[0], width: '100%', class: 'act-image' %>
+            <% else %>
+              <%= video_tag Gig.where(id: favorite.gig_id)[0].gallery[0], width: '100%', class: 'act-image' %>
+            <% end %>
+          </div>
+        <% end %>
+          <div class="index-card">
+            <div class="index-user">
+              <%= image_tag favorite.user.avatar_url(28), class: 'gig-gravatar' %>
+              <%= favorite.user.username %>
+              <div class="rating pull-right">
+                <% 5.times do %>
+                  <i class="fas fa-bolt"></i>
+                <% end %>
+                <p style="color: black; display: inline;">(5)</p>
+              </div>
+            </div>
+            <div style="overflow: hidden;"><p class="index-title"><%= link_to "#{Gig.where(id: favorite.gig_id)[0].title}", Gig.where(id: favorite.gig_id)[0] %></p></div>
+          <% unless Gig.where(id: favorite.gig_id)[0].allow == "Online Only" %>
+            <i class="fas fa-map-marker-alt"></i> <%= Gig.where(id: favorite.gig_id)[0].location %>
+          <% else %>
+          <i class="fas fa-map-marker-alt"></i> Online Only, No Meetups
+          <% end %>
+          <hr>
+          <h3><b>$50</b></h3>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
