@@ -18,6 +18,19 @@
  @import "bootstrap";
  @import 'chosen';
 
+ .grav {
+   margin-top: 40px;
+ }
+
+ .btn-info {
+   padding: 3px 10px !important;
+ }
+
+.main-image {
+  position: relative;
+  top: 27px;
+}
+
  #message-scroll {
    padding-right: 5px;
  }
@@ -135,6 +148,10 @@
    text-overflow: '';
  }
 
+ .convo-btn {
+   font-size: 14px;
+ }
+
  .home-search3 {
    border-radius: 0 !important;
    height: 35px !important;
@@ -169,6 +186,7 @@
    position: absolute;
    right: 0;
    bottom: 0;
+   height: 40px;
    color: white;
    left: 0;
    padding: 1rem;

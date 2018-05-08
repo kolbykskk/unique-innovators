@@ -1,8 +1,12 @@
 <div class="container">
-  <div class="col-md-4">
-    <h3 class="page-header"><b>Edit Account</b></h3>
+  <div class="col-md-2">
+    <%= link_to "https://wordpress.com/log-in?client_id=1854&redirect_to=https%3A%2F%2Fpublic-api.wordpress.com%2Foauth2%2Fauthorize%3Fclient_id%3D1854%26response_type%3Dcode%26blog_id%3D0%26state%3D2950a717a6112faa78afea905ccc18d267caafc4b5b19d03cd8d63be5b6694de%26redirect_uri%3Dhttps%253A%252F%252Fen.gravatar.com%252Fconnect%252F%253Faction%253Drequest_access_token" do %>
+      <%= image_tag current_user.avatar_url(128), class: 'gig-gravatar grav' %>
+    <% end %>
   </div>
-<div class="col-md-12">
+<div class="col-md-10">
+  <h3 class="page-header"><b>Edit Account</b></h3>
+
 <div class="edit_form edit_account">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= devise_error_messages! %>

@@ -4,10 +4,10 @@
       <h1 class="index-main-header">Gig Marketplace<br> For Creators of all Kinds<br></h1>
       <p class="index-secondary-text">Work with creators in your area or all online</p>
       <%= link_to "Browse Gigs and Events", gigs_path, class: 'btn btn-info main-button' %><br>
-      <p style="color: white;"><a href="#">sign up</a> or <a href="#">login</a></p>
+      <p style="color: white;"><%= link_to "sign up", new_user_registration_path %> or <%= link_to "login", new_user_session_path %></p>
     </div>
     <div class="col-md-6 no-mobile">
-      <img src="https://image.ibb.co/c2CTb7/mockup.png" height="600px;"/>
+      <img src="https://image.ibb.co/c2CTb7/mockup.png" class="main-image" height="600px;"/>
     </div>
   </div>
 </div>
