@@ -100,6 +100,6 @@ class GigsController < ApplicationController
 
   private
   def gig_params
-    params.require(:gig).permit(:title, :description, :location, :category, :delivery_time, :allow, {gallery: []}, :price, :event)
+    params.require(:gig).permit(:title, :description, :location, :category, :delivery_time, :allow, {gallery: []}, :price, :balance, :event)
   end
 end

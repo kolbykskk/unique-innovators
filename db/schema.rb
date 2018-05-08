@@ -126,9 +126,7 @@ ActiveRecord::Schema.define(version: 20180507193330) do
     t.datetime "updated_at", null: false
     t.string "seller"
     t.decimal "amount"
-    t.integer "CounterOffer_id"
     t.integer "counter_offer_id"
-    t.index ["CounterOffer_id"], name: "index_receipts_on_CounterOffer_id"
     t.index ["counter_offer_id"], name: "index_receipts_on_counter_offer_id"
     t.index ["gig_id"], name: "index_receipts_on_gig_id"
     t.index ["user_id"], name: "index_receipts_on_user_id"
@@ -164,8 +162,6 @@ ActiveRecord::Schema.define(version: 20180507193330) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
-    t.decimal "balance"
-    t.decimal "money"
     t.string "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
