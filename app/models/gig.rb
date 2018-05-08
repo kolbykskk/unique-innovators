@@ -1,7 +1,12 @@
 class Gig < ApplicationRecord
 
+  default_scope { order(created_at: :desc) }
+
   belongs_to :user
   has_many :favorites, dependent: :destroy
+  has_many :receipts, dependent: :destroy
+  has_many :CounterOffers
+  has_many :reviews
 
   mount_uploaders :gallery, GalleryUploader
   serialize :gallery, JSON
@@ -11,6 +16,7 @@ class Gig < ApplicationRecord
   after_validation :geocode, if: ->(obj){ obj.location.present? and obj.location_changed? }
 
   validates :title, length: { in: 3..75 }, presence: true
+  validates :price, presence: true
   validates :description, length: { in: 50..1000 }, presence: true
   validates :category, presence: true
   validates :allow, acceptance: { accept: ['Online or Meetups', 'Online Only', 'Meetups Only'] }, presence: true

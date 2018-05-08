@@ -1,32 +1,58 @@
-<div class="col-md-2">
-<ul class="nav nav-pills nav-stacked">
-  <li role="presentation" class="show-buyer"><a>Buyer Dashboard</a></li>
-  <li role="presentation" class="show-seller"><a>Seller Dashboard</a></li>
-</ul>
+<div class="container">
+  <div class="col-md-2">
+  <ul class="nav nav-pills nav-stacked">
+    <li role="presentation" class="show-buyer"><a><span class="glyphicon glyphicon-cog"></span> Buyer Dashboard</a></li>
+    <li role="presentation" class="show-seller"><a><span class="glyphicon glyphicon-signal"></span> Seller Dashboard</a></li>
+    <% if current_user.role == "admin" %>
+      <li role="presentation" class="show-admin"><a><span class="glyphicon glyphicon-file"></span> Admin</a></li>
+    <% end %>
+  </ul>
+  </div>
+
+  <%= render partial: 'dashboard_admin_payout' %>
+  <%= render partial: 'dashboard_balance' %>
+  <%= render partial: 'dashboard_seller_counter_offer' %>
+  <%= render partial: 'dashboard_buyer_counter_offer' %>
+  <%= render partial: 'dashboard_receipts' %>
+
+  <%= render partial: 'dashboard_favorites' %>
+  <%= render partial: 'dashboard_receipts_seller' %>
+  <%= render partial: 'dashboard_gigs' %>
+
+  <script>
+  $(document).ready(function() {
+    $('.seller').hide();
+    $('.admin').hide();
+    $('.buyer').show();
+    $('.show-admin').removeClass('active');
+    $('.show-buyer').addClass('active');
+  });
+
+  $('.show-seller').click(function() {
+    $('.buyer').hide();
+    $('.admin').hide();
+    $('.seller').show();
+    $('.show-admin').removeClass('active');
+    $('.show-seller').addClass('active');
+    $('.show-buyer').removeClass('active');
+  });
+
+  $('.show-buyer').click(function() {
+    $('.seller').hide();
+    $('.admin').hide();
+    $('.buyer').show();
+    $('.show-admin').removeClass('active');
+    $('.show-seller').removeClass('active');
+    $('.show-buyer').addClass('active');
+  });
+
+  $('.show-admin').click(function() {
+    $('.buyer').hide();
+    $('.seller').hide();
+    $('.admin').show();
+    $('.show-seller').removeClass('active');
+    $('.show-buyer').removeClass('active');
+    $('.show-admin').addClass('active');
+  });
+  </script>
 </div>
-
-
-<%= render partial: 'dashboard_favorites' %>
-<%= render partial: 'dashboard_gigs' %>
-
-<script>
-$(document).on('turbolinks:load', function() {
-  $('.seller').hide();
-  $('.buyer').show();
-  $('.show-buyer').addClass('active');
-});
-
-$('.show-seller').click(function() {
-  $('.buyer').hide();
-  $('.seller').show();
-  $('.show-seller').addClass('active');
-  $('.show-buyer').removeClass('active');
-});
-
-$('.show-buyer').click(function() {
-  $('.seller').hide();
-  $('.buyer').show();
-  $('.show-seller').removeClass('active');
-  $('.show-buyer').addClass('active');
-});
-</script>

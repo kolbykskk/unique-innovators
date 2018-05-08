@@ -1,0 +1,29 @@
+// Place all the styles related to the reviews controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.review-form {
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 1 0 1px gray;
+  padding: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gig-review {
+  margin-bottom: 10px;
+  background-color: white;
+  box-shadow: 1 0 1px gray;
+  padding: 15px;
+  word-wrap: break-word;
+  border-radius: 5px;
+}
+
+.review-heading {
+  margin-bottom: 10px;
+}
+
+.bolt-rating-container {
+  margin-left: 10px;
+}

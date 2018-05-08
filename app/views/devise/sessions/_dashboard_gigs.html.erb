@@ -1,6 +1,6 @@
-<div class="seller col-md-10">
+<div class="seller col-md-10 col-md-push-2">
   <h3 class="page-header"><b>
-    Your gigs (<%= @gigs.count %>)
+    Your posts <span class="badge"><%= @gigs.count %></span>
   </b></h3>
   <div class="row" style="overflow: auto; white-space: nowrap;">
     <% @gigs.each do |gig| %>
@@ -15,21 +15,29 @@
           </div>
         <% end %>
           <div class="index-card">
-            <div class="index-user">
-              <%= image_tag gig.user.avatar_url(28), class: 'gig-gravatar' %>
-              <%= gig.user.username %>
+            <div class="row index-user">
               <div class="rating pull-right">
-                <% 5.times do %>
-                  <i class="fas fa-bolt"></i>
+                <% if Review.where(gig_id: gig.id).count > 0 %>
+                <%= link_to gig_reviews_path(gig), class: 'rating-gig-show' do %>
+                  <% review_average(gig.id).to_i.times do %>
+                    <img src="https://image.ibb.co/h7zAic/flash_5.png" />
+                  <% end %>
+                  <% (5 - review_average(gig.id)).to_i.times do %>
+                    <img src="https://image.ibb.co/k2ExBx/flash_3.png" />
+                  <% end %>
                 <% end %>
-                <p style="color: black; display: inline;">(5)</p>
+                <% else %>
+                  No reviews yet
+                <% end %>
               </div>
+              <%= image_tag gig.user.avatar_url(28), class: 'gig-gravatar' %>
+              <%= link_to "#{gig.user.username}", user_path(gig.user.id) %>
             </div>
             <div style="overflow: hidden;"><p class="index-title"><%= link_to "#{gig.title}", gig %></p></div>
           <% unless gig.allow == "Online Only" %>
-            <i class="fas fa-map-marker-alt"></i> <%= gig.location %>
+            <span class="glyphicon glyphicon-map-marker"></span> <%= gig.location %>
           <% else %>
-          <i class="fas fa-map-marker-alt"></i> Online Only, No Meetups
+          <span class="glyphicon glyphicon-map-marker"></span> Online Only, No Meetups
           <% end %>
           <hr>
           <h3><b>$50</b></h3>

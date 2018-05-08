@@ -1,6 +1,6 @@
-<div class="buyer col-md-10">
+<div class="buyer col-md-10 col-md-push-2">
   <h3 class="page-header"><b>
-    Your favorited gigs (<%= @favorites.count %>)
+    Favorites <span class="badge"><%= @favorites.count %></span>
   </b></h3>
   <div class="row" style="overflow: auto; white-space: nowrap;">
     <% @favorites.each do |favorite| %>
@@ -15,24 +15,38 @@
           </div>
         <% end %>
           <div class="index-card">
-            <div class="index-user">
-              <%= image_tag favorite.user.avatar_url(28), class: 'gig-gravatar' %>
-              <%= favorite.user.username %>
+            <div class="row index-user">
               <div class="rating pull-right">
-                <% 5.times do %>
-                  <i class="fas fa-bolt"></i>
+                <% if Review.where(gig_id: favorite.gig.id).count > 0 %>
+                  <%= link_to gig_reviews_path(favorite.gig), class: 'rating-gig-show' do %>
+                    <% review_average(favorite.gig.id).to_i.times do %>
+                      <img src="https://image.ibb.co/h7zAic/flash_5.png" />
+                    <% end %>
+                    <% (5 - review_average(favorite.gig.id)).to_i.times do %>
+                      <img src="https://image.ibb.co/k2ExBx/flash_3.png" />
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  No reviews yet
                 <% end %>
-                <p style="color: black; display: inline;">(5)</p>
               </div>
+              <%= image_tag favorite.user.avatar_url(28), class: 'gig-gravatar' %>
+              <span class="gig-username"><%= link_to "#{favorite.user.username}", user_path(favorite.user.id) %></span>
             </div>
+
             <div style="overflow: hidden;"><p class="index-title"><%= link_to "#{Gig.where(id: favorite.gig_id)[0].title}", Gig.where(id: favorite.gig_id)[0] %></p></div>
           <% unless Gig.where(id: favorite.gig_id)[0].allow == "Online Only" %>
-            <i class="fas fa-map-marker-alt"></i> <%= Gig.where(id: favorite.gig_id)[0].location %>
+            <span class="glyphicon glyphicon-pushpin"></span> <%= Gig.where(id: favorite.gig_id)[0].location %>
           <% else %>
-          <i class="fas fa-map-marker-alt"></i> Online Only, No Meetups
+          <span class="glyphicon glyphicon-pushpin"></span> Online Only, No Meetups
           <% end %>
           <hr>
-          <h3><b>$50</b></h3>
+          <h3 class="pull-left" style="width: 50px; margin-top: 6px;"><b>$<%= favorite.gig.price.floor %></b></h3>
+          <span class="pull-right">
+            <% if current_user %>
+              <%= render partial: 'favorites/favorite', locals: { gig: favorite.gig } %>
+            <% end %>
+          </span>
         </div>
       </div>
     <% end %>

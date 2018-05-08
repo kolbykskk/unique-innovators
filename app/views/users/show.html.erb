@@ -1,0 +1,120 @@
+<div class="container">
+  <div class="col-md-3">
+    <div class="text-center"><%= image_tag @user.avatar_url(128), class: 'gig-gravatar' %><br>
+    <h2><b><%= @user.username %></b></h2>
+    <h5>member since <%= time_ago_in_words(@user.created_at) %> ago</h5>
+    <% gigs = Gig.where(user_id: @user.id) %>
+    <% if Review.where(gig_id: gigs).count > 0 %>
+      <div class="rating">
+        <% review_average2(@user.id).to_i.times do %>
+          <img src="https://image.ibb.co/h7zAic/flash_5.png" />
+        <% end %>
+        <% (5 - review_average2(@user.id)).to_i.times do %>
+          <img src="https://image.ibb.co/k2ExBx/flash_3.png" />
+        <% end %>
+      </div>
+    <% else %>
+      No reviews yet
+    <% end %>
+  </div>
+  </div>
+
+    <div class="seller col-md-9">
+    <h3 class="page-header"><b>
+    <%= @user.username %>'s events <span class="badge"><%= @events.count %></span>
+    </b></h3>
+    <div class="row" style="overflow: auto; white-space: nowrap;">
+      <% @events.each do |event| %>
+        <div class="col-md-4 col-sm-8 col-xs-12" style="display: inline-block; float: none;">
+          <%= link_to event do %>
+            <div class="index-image">
+              <% if event.gallery[0].to_s.exclude?("mp4") %>
+                <%= image_tag event.gallery[0], width: '100%', class: 'act-image' %>
+              <% else %>
+                <%= video_tag event.gallery[0], width: '100%', class: 'act-image' %>
+              <% end %>
+            </div>
+          <% end %>
+            <div class="index-card">
+              <div class="row index-user">
+                <div class="rating pull-right">
+                  <% if Review.where(gig_id: event.id).count > 0 %>
+                  <%= link_to gig_reviews_path(event), class: 'rating-gig-show' do %>
+                    <% review_average(event.id).to_i.times do %>
+                      <img src="https://image.ibb.co/h7zAic/flash_5.png" />
+                    <% end %>
+                    <% (5 - review_average(event.id)).to_i.times do %>
+                      <img src="https://image.ibb.co/k2ExBx/flash_3.png" />
+                    <% end %>
+                    <% end %>
+                  <% else %>
+                    No reviews yet
+                  <% end %>
+                </div>
+              </div>
+              <div style="overflow: hidden;"><p class="index-title"><%= link_to "#{event.title}", event %></p></div>
+            <% unless event.allow == "Online Only" %>
+              <span class="glyphicon glyphicon-map-marker"></span> <%= event.location %>
+            <% else %>
+            <span class="glyphicon glyphicon-map-marker"></span> Online Only, No Meetups
+            <% end %>
+            <hr>
+            <h3><b>$50</b></h3>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @events.count == 0 %>
+    <div class="seller col-md-9">
+  <% else %>
+    <div class="seller col-md-9 col-md-push-3">
+  <% end %>
+   <h3 class="page-header"><b>
+      <%= User.find_by_id(params[:id]).username %>'s gigs <span class="badge"><%= @gigs.count %></span>
+    </b></h3>
+    <div class="row" style="overflow: auto; white-space: nowrap;">
+      <% @gigs.each do |gig| %>
+        <div class="col-md-4 col-sm-8 col-xs-12" style="display: inline-block; float: none;">
+          <%= link_to gig do %>
+            <div class="index-image">
+              <% if gig.gallery[0].to_s.exclude?("mp4") %>
+                <%= image_tag gig.gallery[0], width: '100%', class: 'act-image' %>
+              <% else %>
+                <%= video_tag gig.gallery[0], width: '100%', class: 'act-image' %>
+              <% end %>
+            </div>
+          <% end %>
+            <div class="index-card">
+              <div class="row index-user">
+                <div class="rating pull-right">
+                  <% if Review.where(gig_id: gig.id).count > 0 %>
+                  <%= link_to gig_reviews_path(gig), class: 'rating-gig-show' do %>
+                    <% review_average(gig.id).to_i.times do %>
+                      <img src="https://image.ibb.co/h7zAic/flash_5.png" />
+                    <% end %>
+                    <% (5 - review_average(gig.id)).to_i.times do %>
+                      <img src="https://image.ibb.co/k2ExBx/flash_3.png" />
+                    <% end %>
+                  <% end %>
+                  <% else %>
+                    No reviews yet
+                  <% end %>
+                </div>
+              </div>
+              <div style="overflow: hidden;"><p class="index-title"><%= link_to "#{gig.title}", gig %></p></div>
+            <% unless gig.allow == "Online Only" %>
+              <span class="glyphicon glyphicon-map-marker"></span> <%= gig.location %>
+            <% else %>
+            <span class="glyphicon glyphicon-map-marker"></span> Online Only, No Meetups
+            <% end %>
+            <hr>
+            <h3><b>$50</b></h3>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>

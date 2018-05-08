@@ -16,14 +16,267 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ @import 'chosen';
+
+ #message-scroll {
+   padding-right: 5px;
+ }
+
+ a {
+   text-decoration: none !important;
+ }
+
+ .gig-user a {
+   text-decoration: none;
+ }
+
+ .index-user-2 a {
+   text-decoration: none;
+ }
+
+.tags {
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.tags li {
+  float: left;
+}
+
+.tag {
+  background: #267eca;
+  border-radius: 3px 0 0 3px;
+  color: white;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  padding: 0 20px 0 23px;
+  position: relative;
+  cursor: default;
+  margin: 0 10px 10px 0;
+  text-decoration: none;
+  -webkit-transition: color 0.2s;
+}
+
+.tag::before {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+  content: '';
+  height: 6px;
+  left: 10px;
+  position: absolute;
+  width: 6px;
+  top: 10px;
+}
+
+.tag::after {
+  background: #fff;
+  border-bottom: 13px solid transparent;
+  border-left: 10px solid #267eca;
+  border-top: 13px solid transparent;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+ .eventtab {
+   cursor: pointer;
+ }
+
+ .gigtab {
+   cursor: pointer;
+ }
+
+ .container {
+   margin-top: 20px;
+ }
+
+ .search {
+   margin-top: -10px;
+ }
+
+.alert .alert-danger {
+  background-color: #FF7070;
+  text-align: left !important;
+  padding: 10px !important;
+  color: white !important;
+}
+
+ html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+ body {
+   position: relative;
+   margin: 0;
+   padding-bottom: 20rem;
+   min-height: 100%;
+ }
+
+ .home-search2 {
+   border-radius: 0 !important;
+   height: 35px !important;
+   font-size: 15px !important;
+   -webkit-appearance: none;
+   width: 325px;
+   -moz-appearance: none;
+   text-indent: 1px;
+   text-overflow: '';
+ }
+
+ .home-search3 {
+   border-radius: 0 !important;
+   height: 35px !important;
+   font-size: 15px !important;
+   -webkit-appearance: none;
+   width: 125px;
+   -moz-appearance: none;
+   text-indent: 1px;
+   text-overflow: '';
+ }
+
+ .footer-1 {
+   height: 175px;
+   background-color: #2b3138;
+   position: absolute;
+   padding-top: 30px;
+   right: 0;
+   bottom: 0;
+   color: white;
+   left: 0;
+   text-align: center;
+ }
+
+ .edit_account {
+   background-color: white;
+   padding: 10px;
+   box-shadow: 0px 1px 0px grey;
+ }
+
+ .footer-2 {
+   background-color: #171C22;
+   position: absolute;
+   right: 0;
+   bottom: 0;
+   color: white;
+   left: 0;
+   padding: 1rem;
+   text-align: center;
+ }
+
+ .gig-review {
+   box-shadow: 0px 1px 0px grey;
+   border-radius: 0px;
+ }
+
+ .review-form {
+   box-shadow: 0px 1px 0px grey;
+ }
+
+ .chosen-search-input {
+   padding: 5px !important;
+ }
+
+input {
+  border-radius: 0px !important;
+}
+
+textarea {
+  border-radius: 0px !important;
+}
+
+ .charge-form {
+   width: 100px !important;
+ }
+
+ // .right {
+ //   height: 500px !important;
+ //   margin-top: 0px;
+ // }
+
+ .carousel-control {
+   background-image: none !important;
+ }
+
+ .convo-recipients {
+   margin-bottom: -10px;
+ }
+
+.convo-container {
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0px 1px 0px grey;
+}
+
+ .glyphicon-chevron-right {
+   color: black !important;
+ }
+
+.glyphicon-chevron-left {
+  color: black !important;
+
+}
+
+ .edit_gig {
+   max-width: 800px;
+   box-shadow: 0px 1px 0px grey;
+   background-color: white;
+   padding: 10px;
+ }
+
+ .new_gig {
+   max-width: 800px;
+   box-shadow: 0px 1px 0px grey;
+   background-color: white;
+   padding: 10px;
+ }
+
+ .price {
+   width: 150px;
+ }
+
+.form-group {
+  padding: 10px;
+}
 
 .show-buyer {
   margin-bottom: 10px;
   cursor: pointer;
 }
 
+.show-admin {
+  cursor: pointer;
+  background-color: #ff7070;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.dash-box {
+  text-align: center;
+}
+
+.show-admin:hover a {
+  color: #337AB7;
+}
+
+.show-admin a {
+  color: white;
+}
+
 .show-seller {
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .navbar-default {
@@ -81,14 +334,13 @@
 #notice_wrapper_alert {
   width: 100%;
   z-index: 999;
-  background: rgba(255, 0, 0, 0.85);
+  background: #ff7070;
 }
 
 #notice_wrapper_info {
   width: 100%;
   z-index: 999;
   background: rgba(2, 105, 194, 0.85);
-  margin-bottom: 20px;
 }
 
 .notice {
@@ -143,10 +395,21 @@
 .conversations1 {
   background-color: white;
   padding: 10px;
-  box-shadow: 0 0 1px grey;
   margin-bottom: 5px;
+  box-shadow: 0px 1px 0px grey;
 }
+
+@media only screen and (max-width: 600px) {
+  .conversation-scroll {
+    height: 100px !important;
+  }
+}
+
 
 .conversations1-header {
   margin-bottom: 20px;
+}
+
+.send_message_btn {
+  margin-top: -40px;
 }

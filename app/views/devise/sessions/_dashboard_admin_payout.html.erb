@@ -1,0 +1,55 @@
+<div class="admin col-md-10">
+
+  <div class="panel panel-default">
+    <div class="panel-heading" style="background-color: #ff7070;">
+      <h3 class="panel-title" style="color: white;">Overview</h3>
+    </div>
+    <div class="panel-body">
+      <div class="col-md-3">
+        <div class='well dash-box'>
+          <h2><span class="glyphicon glyphicon-user"></span> <%= User.all.count %></h2>
+          <h4>Users</h4>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class='well dash-box'>
+          <h2><span class="glyphicon glyphicon-list-alt"></span> <%= Gig.all.count %></h2>
+          <h4>Gigs</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<h3 class="page-header">
+  <b>Payout Requests</b>
+</h3>
+
+<div class="admin-payout">
+  <% Payout.all.each do |payout| %>
+    <div class="col-md-12 purchased-gig">
+      <div class="row one">
+        <b>User:</b> <%= payout.user.username %>
+        <span class="pull-right"><%= time_ago_in_words(payout.created_at) %> ago</span>
+      </div>
+      <div class="row one">
+        <b>PayPal Email:</b> <%= payout.email %>
+      </div>
+      <div class="row one">
+        <b>Amount:</b> $<%= payout.amount %>
+      </div>
+      <hr>
+      <div class="row one">
+        <% unless payout.completed == true %>
+          <%= link_to "Mark as complete", payout, method: :put, class: 'btn btn-xs btn-info' %>
+        <% end %>
+        <% if payout.completed == false %>
+          <span class="pull-right"><b>Status:</b> <button class="btn btn-xs btn-info">Waiting for you</button></span>
+        <% else %>
+          <span class="pull-right"><b>Status:</b> <button class="btn btn-xs btn-success">Completed</button></span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+</div>

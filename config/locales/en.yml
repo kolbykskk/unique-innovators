@@ -31,3 +31,7 @@
 
 en:
   hello: "Hello world"
+  mailboxer:
+    message_mailer:
+      subject_new: 'Unique Innovators - New Message: %{subject}'
+      subject_reply: 'Unique Innovators - New Reply: %{subject}'

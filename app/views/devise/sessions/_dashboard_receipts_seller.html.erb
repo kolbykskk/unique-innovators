@@ -1,0 +1,64 @@
+<div class="seller col-md-10 col-md-push-2">
+  <h3 class="page-header"><b>
+    Sold <span class="badge"><%= Receipt.where(seller: current_user.id).count %></span> <small class="show-seller-receipt" style="cursor: pointer;">show</small><small class="hide-seller-receipt" style="display: none; cursor: pointer;">hide</small>
+  </b></h3>
+  <div class="alert alert-warning" style="color: black; padding: 15px; font-weight: normal;"><span class="glyphicon glyphicon-alert"></span><b> Important:</b> Be sure that the buyer marks your gig as complete on their end before you hand over the final product/service. This is how you get your money! Events are taken care of automatically.</div>
+  <hr>
+  <div class="receipt-container" style="display: none">
+    <% Receipt.where(seller: current_user.id).each do |receipt| %>
+      <div class="col-md-12 purchased-gig">
+        <div class="row one">
+          <div class="purchased-title pull-left">
+            <b>Gig:</b> <%= link_to "#{receipt.gig.title}", receipt.gig %>
+          </div>
+        </div>
+        <div class="row one">
+          <b>Buyer:</b> <%= receipt.user.username %>
+        </div>
+        <div class="row two">
+          <small><%= time_ago_in_words(receipt.created_at) %> ago for <b>$<% amt = receipt.amount.to_s %><%= amt.chomp('00.0') %>.00</small></b>
+        </div>
+        <div class="row one">
+          <hr>
+          <% if Review.where(gig_id: receipt.gig.id).count > 0 %>
+          <%= link_to gig_reviews_path(receipt.gig), class: 'rating-gig-show' do %>
+            <% review_average(receipt.gig.id).to_i.times do %>
+              <img src="https://image.ibb.co/h7zAic/flash_5.png" />
+            <% end %>
+            <% (5 - review_average(receipt.gig.id)).to_i.times do %>
+              <img src="https://image.ibb.co/k2ExBx/flash_3.png" />
+            <% end %>
+          <% end %>
+          <% else %>
+            No reviews yet
+          <% end %>
+          <% if can_write_review(receipt.gig.id) %>
+            <%= link_to "Write a review", gig_reviews_path(receipt.gig), class: 'btn btn-xs btn-info' %>
+          <% end %>
+          <div class="pull-right">
+            <b>Status: </b>
+            <% if receipt.completed == false %>
+              <div class="btn btn-xs btn-info" style="cursor: default;">In Process</div>
+            <% else %>
+              <div class="btn btn-xs btn-success" style="cursor: default;">Complete</div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+  </div>
+
+  <script>
+    $('.hide-seller-receipt').click(function(){
+      $('.receipt-container').hide();
+      $('.hide-seller-receipt').hide();
+      $('.show-seller-receipt').show();
+    });
+    $('.show-seller-receipt').click(function(){
+      $('.receipt-container').show();
+      $('.hide-seller-receipt').show();
+      $('.show-seller-receipt').hide();
+    });
+  </script>

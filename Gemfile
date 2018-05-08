@@ -53,6 +53,8 @@ gem 'figaro'
 
 gem 'geocoder'
 
+gem 'pundit'
+
 gem 'carrierwave', '~> 1.0'
 
 gem 'carrierwave-video'
@@ -64,6 +66,10 @@ gem 'kaminari'
 gem 'kaminari-bootstrap'
 
 gem 'mailboxer'
+
+gem 'stripe'
+
+gem 'chosen-rails'
 
 group :development do
   gem 'listen', '~> 3.0.5'

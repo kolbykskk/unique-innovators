@@ -9,6 +9,10 @@ class User < ApplicationRecord
 
    has_many :gigs
    has_many :favorites, dependent: :destroy
+   has_many :receipts, dependent: :destroy
+   has_many :CounterOffers
+   has_many :payouts
+   has_many :reviews
 
    validates :username, presence: :true, uniqueness: { case_sensitive: false }
    validate :validate_username

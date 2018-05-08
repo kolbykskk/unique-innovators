@@ -5,9 +5,9 @@
     <%= csrf_meta_tags %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
 
@@ -29,7 +29,6 @@
         <div class="collapse navbar-collapse navHeaderCollapse">
           <ul class="nav navbar-nav">
             <li><%= link_to "Home", welcome_index_path %></li>
-            <li><%= link_to "About", welcome_about_path %></li>
           </ul>
         <% unless user_signed_in? %>
           <ul class="nav navbar-nav navbar-right">
@@ -38,7 +37,7 @@
           </ul>
         <% else %>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Dashboard", users_dashboard_path %></li>
+            <li><%= link_to "Dashboard", "/users/dashboard/#{current_user.id }" %></li>
             <li><%= link_to "Messages", conversations_path %></li>
             <li class="dropdown">
               <a class="dropdown-toggle" href="#" data-toggle="dropdown">
@@ -49,7 +48,7 @@
                   <%= current_user.username %></li>
                   <li><%= link_to "Edit Account", edit_user_registration_path %></li>
                 <div class="divider"></div>
-                  <li><%= link_to "Dashboard", users_dashboard_path %></li>
+                <li><%= link_to "Dashboard", "/users/dashboard/#{ current_user.id }" %></li>
                   <li><%= link_to "Messages", conversations_path %></li>
                 <div class="divider"></div>
                   <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
@@ -85,10 +84,29 @@
       <% end %>
     <% end %>
 
-    <div class="container">
-
-      <%= yield %>
+    <div class="container" style="margin-top: 0px !important;">
     </div>
+    <%= yield %>
+
+
+    <footer>
+      <div class="footer-1">
+        <%= link_to "http://www.facebook.com" do %>
+          <img src="https://image.ibb.co/cFmLb7/facebook.png" />
+        <% end %>
+        <%= link_to "http://www.twitter.com" do %>
+          <img src="https://image.ibb.co/gjyE8n/twitter_1.png" />
+        <% end %>
+        <%= link_to "http://www.instgram.com" do %>
+          <img src="https://image.ibb.co/eAc7Tn/instagram.png" />
+        <% end %>
+
+      </div>
+      <div class="footer-2">
+        <p>Unique Innovators © 2018 | All Rights Reserved</p>
+      </div>
+    </footer>
+
     <script>
       $(document).on('turbolinks:load', function() {
         setTimeout(function(){
@@ -101,5 +119,6 @@
         }, 4500);
       });
     </script>
+
   </body>
 </html>

@@ -1,0 +1,73 @@
+<div class="buyer col-md-10">
+  <h3 class="page-header"><b>
+    Your submitted counter offers <span class="badge"><%= current_user.CounterOffers.count %></span> <small class="show-buyer-counter" style="cursor: pointer;">show</small><small class="hide-buyer-counter" style="display: none; cursor: pointer;">hide</small>
+  </b></h3>
+
+  <div class="buyer-counter" style="display: none;">
+    <% current_user.CounterOffers.each do |offer| %>
+      <div class="col-md-12 purchased-gig">
+        <div class="row one">
+          <div class="pull-left">
+            Counter Offer of <b>$<%= offer.value %>0</b> (reg. $<%= offer.gig.price %>)<br>
+            <small><%= time_ago_in_words(offer.created_at) %> ago</small>
+          </div>
+        </div>
+        <div class="row two">
+          <div class="purchased-title">
+            <b>Gig:</b> <%= link_to "#{offer.gig.title}", offer.gig %>
+          </div>
+        </div>
+        <div class="row one">
+          <hr >
+          <% if offer.declined == false && offer.accepted == false %>
+            <%= link_to "Cancel", offer, method: :delete, remote: true, class: 'btn btn-xs btn-danger' %>
+          <% end %>
+          <% if offer.accepted == true && Receipt.find_by(gig: offer.gig, user: current_user, counter_offer_id: offer.id) == nil %>
+            <div class="charge-form pull-left">
+                <%= form_tag charges_path, html: { class: 'charge-form-2' } do %>
+                  <input type="text" name="counter_offer" value="<%= offer.id %>" style="display: none;">
+                  <input type="text" name="price" value="<%= offer.value * 100 %>" style="display: none;">
+                  <input type="text" name="description" value="<%= offer.gig.title %>" style="display: none;">
+                  <input type="text" name="gig" value="<%= offer.gig.id %>" style="display: none;">
+                  <script class='stripe-button' src="https://checkout.stripe.com/checkout.js"
+                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                  data-amount="<%= offer.value * 100 %>"
+                  data-description="<%= offer.gig.title %>">
+                  </script>
+
+                  <button type="submit" class="btn btn-xs btn-success">
+                    <span class="pull-left">Purchase for $<%= offer.value %>0</span>
+                  </button>
+                  <% end %>
+            </div>
+          <% end %>
+          <div class="pull-right">
+          <b>Status:</b>
+            <% if offer.declined == false && offer.accepted == false %>
+              <div class="btn btn-xs btn-info" style="cursor: default; margin-left: 5px;">Waiting for seller</div>
+            <% elsif offer.declined == true %>
+              <div class="btn btn-xs btn-danger" style="cursor: default;">Declined</div>
+            <% elsif offer.accepted == true %>
+              <div class="btn btn-xs btn-success" style="cursor: default;">Accepted</div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $('.hide-buyer-counter').click(function(){
+    $('.buyer-counter').hide();
+    $('.buyer-receipt').removeClass('col-md-push-2');
+    $('.hide-buyer-counter').hide();
+    $('.show-buyer-counter').show();
+  });
+  $('.show-buyer-counter').click(function(){
+    $('.buyer-receipt').addClass('col-md-push-2');
+    $('.buyer-counter').show();
+    $('.hide-buyer-counter').show();
+    $('.show-buyer-counter').hide();
+  });
+</script>

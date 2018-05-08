@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180417060529) do
+ActiveRecord::Schema.define(version: 20180507193330) do
+
+  create_table "counter_offers", force: :cascade do |t|
+    t.boolean "accepted"
+    t.boolean "declined"
+    t.integer "user_id"
+    t.integer "gig_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "value"
+    t.integer "seller"
+    t.boolean "open"
+    t.index ["gig_id"], name: "index_counter_offers_on_gig_id"
+    t.index ["user_id"], name: "index_counter_offers_on_user_id"
+  end
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
@@ -34,6 +48,9 @@ ActiveRecord::Schema.define(version: 20180417060529) do
     t.float "longitude"
     t.string "allow"
     t.string "gallery"
+    t.decimal "price"
+    t.decimal "balance"
+    t.boolean "event"
     t.index ["user_id"], name: "index_gigs_on_user_id"
   end
 
@@ -91,6 +108,44 @@ ActiveRecord::Schema.define(version: 20180417060529) do
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
   end
 
+  create_table "payouts", force: :cascade do |t|
+    t.integer "user_id"
+    t.decimal "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "email"
+    t.boolean "completed"
+    t.index ["user_id"], name: "index_payouts_on_user_id"
+  end
+
+  create_table "receipts", force: :cascade do |t|
+    t.boolean "completed"
+    t.integer "user_id"
+    t.integer "gig_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "seller"
+    t.decimal "amount"
+    t.integer "CounterOffer_id"
+    t.integer "counter_offer_id"
+    t.index ["CounterOffer_id"], name: "index_receipts_on_CounterOffer_id"
+    t.index ["counter_offer_id"], name: "index_receipts_on_counter_offer_id"
+    t.index ["gig_id"], name: "index_receipts_on_gig_id"
+    t.index ["user_id"], name: "index_receipts_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "gig_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "description"
+    t.string "title"
+    t.string "rating"
+    t.index ["gig_id"], name: "index_reviews_on_gig_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -109,6 +164,9 @@ ActiveRecord::Schema.define(version: 20180417060529) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
+    t.decimal "balance"
+    t.decimal "money"
+    t.string "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,60 +1,95 @@
-<div class="row">
-  <div class="col-md-12 search-text">
-    <div class="inside">
-      <div class="search-row">
-        <%= form_tag gigs_path, method: :get, class: 'search-form' do %>
-          <p>
-            <div class="form-group col-md-6">
-              <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: "Search" %>
-            </div>
-            <div class="form-group col-md-3">
-              <%= text_field_tag :location, params[:location], class: 'form-control', placeholder: "Location" %>
-            </div>
-            <div class="form-group col-md-2">
-              <%= select_tag :radius, options_for_select(['10', '25', '50', '75', '100', '200']), class: 'form-control' %>
-            </div>
-            <%= submit_tag "Search", name: nil, class: "btn btn-info" %>
-          </p>
+<div class="search">
+  <div class="container search-container">
+    <%= form_tag gigs_path, method: :get, class: 'search-form' do %>
+      <p>
+        <div class="form-group col-md-6">
+          <%= text_field_tag :search, params[:search], class: 'form-control home-search', placeholder: "Search" %>
+        </div>
+        <div class="form-group col-md-3">
+          <%= text_field_tag :location, params[:location], class: 'form-control home-search', placeholder: "Location" %>
+        </div>
+        <div class="form-group col-md-1">
+          <%= select_tag :radius, options_for_select(['10', '25', '50', '75', '100', '200']), class: 'form-control home-search' %>
+        </div>
+        <div class="form-group">
+          <%= submit_tag "Search", name: nil, class: "btn btn-info search-submit home-search" %>
+        </div>
+      </p>
+    <% end %>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <% if current_user %>
+      <div class="col-md-3">
+        <div class="index-card2 text-center">
+        <%= link_to new_user_gig_path(current_user) do %>
+          <img src="https://image.ibb.co/eip5ZS/plus_2.png" height= "150"/>
         <% end %>
       </div>
-     </div>
-     <%= render partial: 'index_search_text' %>
+      </div>
+    <% end %>
+  <% @gigs.each do |gig| %>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <%= link_to gig do %>
+        <div class="index-image">
+          <% if gig.gallery[0].to_s.exclude?("mp4") %>
+            <%= image_tag gig.gallery[0], width: '100%', class: 'act-image' %>
+          <% else %>
+            <%= video_tag gig.gallery[0], width: '100%', class: 'act-image' %>
+          <% end %>
+        </div>
+      <% end %>
+        <div class="index-card">
+          <div class="index-user-2">
+            <%= link_to user_path(gig.user.id) do %>
+              <%= image_tag gig.user.avatar_url(28), class: 'gig-gravatar' %>
+              <%= gig.user.username %>
+            <% end %>
+            <div class="rating pull-right">
+              <div>
+              <% if Review.where(gig_id: gig.id).count > 0 %>
+              <%= link_to gig_reviews_path(gig), class: 'rating-gig-show' do %>
+                <% review_average(gig.id).to_i.times do %>
+                  <img src="https://image.ibb.co/h7zAic/flash_5.png" />
+                <% end %>
+                <% (5 - review_average(gig.id)).to_i.times do %>
+                  <img src="https://image.ibb.co/k2ExBx/flash_3.png" />
+                <% end %>
+              <% end %>
+              <% else %>
+                No reviews yet
+              <% end %>
+              </div>
+            </div>
+          </div>
+          <p class="index-title"><%= link_to "#{gig.title}", gig %></p>
+        <% unless gig.allow == "Online Only" %>
+          <span class="glyphicon glyphicon-map-marker"></span> <%= gig.location %>
+        <% else %>
+        <span class="glyphicon glyphicon-map-marker"></span> Online Only, No Meetups
+        <% end %>
+        <hr>
+        <h3><b>$<%= (gig.price).floor %></b></h3>
+        <% if gig.event == true %>
+          <p class="tag">Event</p>
+        <% else %>
+          <p class="tag">Gig</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
   </div>
   <%= paginate(@gigs) %>
 </div>
-<div class="row">
-<% @gigs.each do |gig| %>
-  <div class="col-md-4 col-sm-8 col-xs-12">
-    <%= link_to gig do %>
-      <div class="index-image">
-        <% if gig.gallery[0].to_s.exclude?("mp4") %>
-          <%= image_tag gig.gallery[0], width: '100%', class: 'act-image' %>
-        <% else %>
-          <%= video_tag gig.gallery[0], width: '100%', class: 'act-image' %>
-        <% end %>
-      </div>
-    <% end %>
-      <div class="index-card">
-        <div class="index-user">
-          <%= image_tag gig.user.avatar_url(28), class: 'gig-gravatar' %>
-          <%= gig.user.username %>
-          <div class="rating pull-right">
-            <% 5.times do %>
-              <i class="fas fa-bolt"></i>
-            <% end %>
-            <p style="color: black; display: inline;">(5)</p>
-          </div>
-        </div>
-        <p class="index-title"><%= link_to "#{gig.title}", gig %></p>
-      <% unless gig.allow == "Online Only" %>
-        <i class="fas fa-map-marker-alt"></i> <%= gig.location %>
-      <% else %>
-      <i class="fas fa-map-marker-alt"></i> Online Only, No Meetups
-      <% end %>
-      <hr>
-      <h3><b>$50</b></h3>
-    </div>
-  </div>
-<% end %>
-</div>
-<%= paginate(@gigs) %>
+
+<script>
+$(document).on('turbolinks:load', function() {
+    var input = document.getElementById('location');
+    autocomplete = new google.maps.places.Autocomplete(input, {types: ['geocode']});
+    google.maps.event.addListener(autocomplete, 'place_changed', function(){
+      var place = autocomplete.getPlace();
+    });
+});
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjbcZiWF7waJt5NkAYWxvr06JKJWVNaJc&libraries=places"></script>

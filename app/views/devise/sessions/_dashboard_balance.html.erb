@@ -1,0 +1,65 @@
+<div class="seller col-md-10">
+<h3 class="page-header">
+  <% balance = 0 %>
+  <% Gig.where(user_id: current_user.id).each do |gig| %>
+    <% balance += gig.balance %>
+  <% end %>
+  <% if balance == 0.0 %>
+    <b>Balance:</b> $0.00
+  <% else %>
+    <b>Balance:</b> $<% bal = balance.to_s %><%= bal.chomp('00.0') %>.00<br>
+  <% end %>
+  <small class="show-buyer-counter" style="cursor: pointer;">show</small><small class="hide-buyer-counter" style="display: none; cursor: pointer;">hide</small>
+</h3>
+<% payout = Payout.where(user_id: current_user.id, completed: false).last %>
+<% if bal.to_i > 0 && payout == nil %>
+  <%= form_tag payouts_path, method: :post do %>'
+    <input name="amount" value="<%= bal.chomp('00.0') %>" style="display: none;"></input>
+    <%= email_field_tag :email, nil, placeholder: "Enter your PayPal email", class: "email_field", required: true %>
+    <%= submit_tag "Request Payout", class: 'email_submit btn btn-sm btn-info' %>
+  <% end %>
+<% else %>
+  <input type="text" placeholder="Enter your PayPal email" class="email_field" disabled></input>
+  <input type="submit" value="Request Payout" class="email_submit btn btn-info"disabled></input><br>
+<% end %>
+<hr>
+<div class="buyer-counter" style="display: none;">
+
+<div class="admin-payout">
+  <% Payout.where(user_id: current_user.id).each do |payout| %>
+    <div class="col-md-12 purchased-gig">
+      <div class="row one">
+        <b>PayPal Email:</b> <%= payout.email %>
+        <span class="pull-right"><%= time_ago_in_words(payout.created_at) %> ago</span>
+      </div>
+      <div class="row one">
+        <b>Amount:</b> $<%= payout.amount.floor %>
+      </div>
+      <hr>
+      <div class="row one">
+        <% if payout.completed == false %>
+          <span class="pull-right"><b>Status:</b> <button class="btn btn-xs btn-info">Pending</button></span>
+        <% else %>
+          <span class="pull-right"><b>Status:</b> <button class="btn btn-xs btn-success">Completed</button></span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>
+</div>
+
+<script>
+  $('.hide-buyer-counter').click(function(){
+    $('.buyer-counter').hide();
+    $('.buyer-receipt').removeClass('col-md-push-2');
+    $('.hide-buyer-counter').hide();
+    $('.show-buyer-counter').show();
+  });
+  $('.show-buyer-counter').click(function(){
+    $('.buyer-receipt').addClass('col-md-push-2');
+    $('.buyer-counter').show();
+    $('.hide-buyer-counter').show();
+    $('.show-buyer-counter').hide();
+  });
+</script>

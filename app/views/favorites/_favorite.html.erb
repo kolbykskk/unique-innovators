@@ -1,9 +1,9 @@
 <% if favorite = current_user.favorite_for(gig) %>
-  <%= link_to favorite, class: 'btn btn-danger', method: :delete, remote: true do %>
-    <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Unfavorite
+  <%= link_to favorite, method: :delete, remote: true do %>
+  <img src="https://image.ibb.co/mEcUmx/idea_1.png">
   <% end %>
 <% else %>
-  <%= link_to [gig, Favorite.new], class: 'btn btn-primary', method: :post, remote: true do %>
-    <i class="glyphicon glyphicon-star"> </i>&nbsp; Favorite
+  <%= link_to [gig, Favorite.new], method: :post, remote: true do %>
+  <img src="https://image.ibb.co/jC1BzH/idea.png">
   <% end %>
 <% end %>

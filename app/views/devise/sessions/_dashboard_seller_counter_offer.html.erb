@@ -1,0 +1,57 @@
+<div class="seller col-md-10 col-md-push-2">
+  <h3 class="page-header"><b>
+    Your received counter offers <span class="badge"><%= CounterOffer.where(seller: current_user.id).count %></span> <small class="show-seller-counter" style="cursor: pointer;">show</small><small class="hide-seller-counter" style="display: none; cursor: pointer;">hide</small>
+  </b></h3>
+
+  <div class="seller-counter" style="display: none;">
+    <% CounterOffer.where(seller: current_user.id).each do |offer| %>
+      <div class="col-md-12 purchased-gig">
+        <div class="row one">
+          <div class="pull-left">
+            Counter Offer of <b>$<%= offer.value %>0</b> (reg. $<%= offer.gig.price %>)<br>
+             by <i><%= offer.user.username %></i>
+          </div>
+        </div>
+        <div class="row one">
+          <small><%= time_ago_in_words(offer.created_at) %> ago</small>
+        </div>
+        <div class="row two">
+          <div class="purchased-title">
+            <b>Gig:</b> <%= link_to "#{offer.gig.title}", offer.gig %>
+          </div>
+        </div>
+        <div class="row one">
+          <hr>
+          <% if offer.declined == false && offer.accepted == false %>
+            <%= link_to "Accept", counter_offer_path(offer, counter_offer: {accepted: true}), method: :put %> /
+            <%= link_to "Decline", counter_offer_path(offer, counter_offer: {declined: true}), method: :put %>
+          <% end %>
+          <div class="pull-right">
+          <b>Status:</b>
+            <% if offer.declined == false && offer.accepted == false %>
+              <div class="btn btn-xs btn-info" style="cursor: default; margin-left: 5px;">Waiting for you</div>
+            <% elsif offer.declined == true %>
+              <div class="btn btn-xs btn-danger" style="cursor: default;">Declined by you</div>
+            <% elsif offer.accepted == true %>
+              <div class="btn btn-xs btn-success" style="cursor: default;">Accepted by you</div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $('.hide-seller-counter').click(function(){
+    $('.seller-counter').hide();
+    $('.hide-seller-counter').hide();
+    $('.show-seller-counter').show();
+  });
+  $('.show-seller-counter').click(function(){
+    $('.seller-counter').show();
+    $('.hide-seller-counter').show();
+    $('.show-seller-counter').hide();
+  });
+</script>

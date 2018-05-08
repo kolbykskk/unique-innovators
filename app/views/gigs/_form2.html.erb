@@ -1,0 +1,52 @@
+<%= form_for form_config do |f| %>
+  <% if @gig.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@gig.errors.count, "error") %>.</h4>
+      <ul>
+        <% @gig.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="edit_form">
+    <input name="event" value="false" style="display: none;"></input>
+    <div class="form-group" style="display: none;">
+      <%= f.text_field :balance, value: 0.00, class: 'form-control' %>
+      <%= f.text_field :allow, value: 'Meetups Only', class: 'form-control' %>
+      <%= f.text_field :event, value: 'true', class: 'form-control' %>
+      <%= f.text_field :delivery_time, value: '1 day', class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :category %><br>
+      <%= f.select :category, list_of_categories, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label "Ticket Price" %><br>
+      <%= f.text_field :price, class: 'form-control price', placeholder: "$" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control', placeholder: "Enter a title for your event - e.g. Concert" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'form-control', placeholder: "Enter a description for your event - Include as many details as possible" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :gallery, "Gallery (CTRL + CLICK to select multiple images)" %>
+      <%= f.file_field :gallery, multiple: true %>
+      <% if @gig.gallery.count > 0 %>
+        <div class="alert alert-info" style="margin-top: 10px;"><%= @gig.gallery.count %> image already uploaded.<br> Selecting more images will overwrite these.</div>
+      <% end %>
+    </div>
+    <div class="form-group location-form-group">
+      <%= f.label :location %>
+      <%= f.text_field :location, class:"form-control gig_location", placeholder: "Start typing your location..." %>
+    </div>
+    <div class="form-group">
+      <%= f.submit submit_button, class:"btn btn-info" %>
+    </div>
+  </div>
+<% end %>

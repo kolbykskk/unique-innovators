@@ -1,2 +1,86 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div class="index-main">
+  <div class="container">
+    <div class="col-md-6 index-main-text">
+      <h1 class="index-main-header">Gig Marketplace<br> For Creators of all Kinds<br></h1>
+      <p class="index-secondary-text">Work with creators in your area or all online</p>
+      <%= link_to "Browse Gigs and Events", gigs_path, class: 'btn btn-info main-button' %><br>
+      <p style="color: white;"><a href="#">sign up</a> or <a href="#">login</a></p>
+    </div>
+    <div class="col-md-6 no-mobile">
+      <img src="https://image.ibb.co/c2CTb7/mockup.png" height="600px;"/>
+    </div>
+  </div>
+</div>
+<div class="search">
+  <div class="container search-container">
+    <%= form_tag gigs_path, method: :get, class: 'search-form' do %>
+      <p>
+        <div class="form-group col-md-6">
+          <%= text_field_tag :search, params[:search], class: 'form-control home-search', placeholder: "Search" %>
+        </div>
+        <div class="form-group col-md-3">
+          <%= text_field_tag :location, params[:location], class: 'form-control home-search', placeholder: "Location" %>
+        </div>
+        <div class="form-group col-md-1">
+          <%= select_tag :radius, options_for_select(['10', '25', '50', '75', '100', '200']), class: 'form-control home-search' %>
+        </div>
+        <div class="form-group">
+          <%= submit_tag "Search", name: nil, class: "btn btn-info search-submit home-search" %>
+        </div>
+      </p>
+    <% end %>
+  </div>
+</div>
+<div style="padding-bottom: 50px;">
+  <div class="container">
+    <div class="col-md-12 bottom">
+      <h2 class="text-center"><b>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel tempus ante.</b></h2>
+    </div>
+    <div class="text-center no-mobile">
+      <div class="col-md-4 index-box" >
+        <img style="margin-bottom: 10px;" src="https://image.ibb.co/fnLouH/team.png" height= 50px; /><br>
+        Lorem ipsum dolor sit amet,<br> consectetur adipiscing elit.
+      </div>
+      <div class="col-md-4 index-box">
+        <img style="margin-bottom: 10px;" src="https://image.ibb.co/kG0hMx/calendar.png" height= 50px; /><br>
+        Lorem ipsum dolor sit amet,<br> consectetur adipiscing elit.
+      </div>
+      <div class="col-md-4 index-box">
+        <img style="margin-bottom: 10px;" src="https://image.ibb.co/mmL4ZH/speech_bubble.png" height= 50px; /><br>
+        Lorem ipsum dolor sit amet,<br> consectetur adipiscing elit.
+      </div>
+    </div>
+  </div>
+</div>
+<div style="background-color: white; padding-top: 20px;">
+  <div class="container index-cont">
+    <div class="col-md-4">
+      <img src="https://image.ibb.co/dNmX4H/map.jpg" height= '300px' width="300px" style="border-radius: 50%"/>
+    </div>
+    <div class="col-md-8 right2">
+      <h2 style="font-weight: bold;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel tempus ante. Cras eget elit dapibus, lobortis turpis non, vestibulum est. Aenean id lectus enim.</h2>
+    </div>
+  </div>
+</div>
+<div style="background-color: white; padding-bottom: 20px;">
+  <div class="container index-cont">
+    <hr>
+    <div class="col-md-4">
+      <img src="https://image.ibb.co/isA9jH/ODRADI0.jpg" height= '300px' width="300px" style="border-radius: 50%"/>
+    </div>
+    <div class="col-md-8 right2">
+      <h2 style="font-weight: bold;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel tempus ante. Cras eget elit dapibus, lobortis turpis non, vestibulum est. Aenean id lectus enim.</h2>
+    </div>
+  </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjbcZiWF7waJt5NkAYWxvr06JKJWVNaJc&libraries=places"></script>
+<script>
+$(document).on('turbolinks:load', function() {
+    var input = document.getElementById('location');
+    autocomplete = new google.maps.places.Autocomplete(input, {types: ['geocode']});
+    google.maps.event.addListener(autocomplete, 'place_changed', function(){
+      var place = autocomplete.getPlace();
+    });
+});
+</script>

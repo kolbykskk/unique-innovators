@@ -1,42 +1,46 @@
 class GigsController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :no_create, only: [:new, :create]
 
   def new
+    @user = User.find(params[:user_id])
     @gig = Gig.new
   end
 
   def create
-    @gig = current_user.gigs.build(gig_params)
+    @user = User.find(params[:user_id])
+    @gig = @user.gigs.build(gig_params)
 
     if @gig.save
-      flash[:notice] = "Gig successfully created!"
+      flash[:notice] = "#{@gig.title} successfully created!"
       redirect_to @gig
     else
-      flash[:alert] = "An error occured. Gig could not be created."
       render :new
     end
   end
 
   def edit
     @gig = Gig.find(params[:id])
+    authorize @gig
   end
 
   def update
     @gig = Gig.find(params[:id])
+    authorize @gig
     @gig.assign_attributes(gig_params)
 
     if @gig.save
-      flash[:notice] = "Gig was updated."
+      flash[:notice] = "#{@gig.title} successfully updated!"
       redirect_to @gig
     else
-      flash[:alert] = "An error occurred. Gig could not be updated."
       render :edit
     end
   end
 
   def destroy
     @gig = Gig.find(params[:id])
+    authorize @gig
 
     if @gig.destroy
       flash[:notice] = "\"#{@gig.title}\" was deleted successfully"
@@ -49,6 +53,7 @@ class GigsController < ApplicationController
 
   def show
     @gig = Gig.find(params[:id])
+    @CounterOffer = CounterOffer.new
   end
 
   def index
@@ -67,8 +72,34 @@ class GigsController < ApplicationController
     end
   end
 
+
+  def show_counter_offer
+    if current_user
+      offer = CounterOffer.where(user_id: current_user.id, gig: Gig.find_by_id(params[:id])).last
+      if offer || Gig.find_by_id(params[:id]).user == current_user
+        test = current_user && current_user != Gig.find_by_id(params[:id]).user &&
+        offer.open == false
+        test
+      else
+        true
+      end
+    end
+  end
+
+  def no_create
+    if params[:user_id].to_i == current_user.id.to_i
+
+    else
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to(request.referrer || root_path)
+    end
+  end
+
+
+  helper_method :show_counter_offer
+
   private
   def gig_params
-    params.require(:gig).permit(:title, :description, :location, :category, :delivery_time, :allow, {gallery: []})
+    params.require(:gig).permit(:title, :description, :location, :category, :delivery_time, :allow, {gallery: []}, :price, :balance, :event)
   end
 end

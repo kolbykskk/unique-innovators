@@ -1,0 +1,100 @@
+<div class="container">
+<% if can_write_review(@gig.id) %>
+<div class="col-md-8 col-md-push-2 col-sm-12 col-xs-12 review-form">
+  <h3>
+    <b>Write a Review</b>
+    <hr>
+  </h3>
+  <div class="bolt-rating-container">
+    <b>Rate your overall satisfaction:</b><br>
+    <% 5.times do |i| %>
+      <img class="review-bolt-<%= i %>" src="https://image.ibb.co/k2ExBx/flash_3.png" />
+    <% end %>
+  </div>
+
+  <%= form_for [@gig, Review.new], remote: true do |f| %>
+    <input class="rating" name="rating" value="" style="display: none;"></input>
+    <div class="form-group">
+      <%= f.label "Review Title:" %><br>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+    <div class="form-group" style="margin-top: -25px;">
+      <%= f.label "Review Description:" %><br>
+      <%= f.text_area :description, class: 'form-control' %>
+    </div>
+    <div class="form-group" style="margin-top: -25px;">
+      <%= f.submit "Submit Review", class: 'btn btn-info' %>
+    </div>
+  <% end %>
+  </div>
+<% end %>
+
+<div class="col-md-8 col-md-push-2 col-sm-12 col-xs-12">
+  <h3 class="page-header">
+    <b>Reviews</b> <span class="badge"><%= @gig.reviews.count %></span>
+  </h3>
+
+  <% @gig.reviews.each do |review| %>
+  <div class="gig-review">
+    <div class="review-heading">
+      <small><span class="pull-right"><%= time_ago_in_words(review.created_at) %> ago</span></small>
+      <b>Review by:</b> <%= review.user.username %><br>
+    </div>
+      <% if review.rating %>
+        <% review.rating.to_i.times do %>
+          <img src="https://image.ibb.co/h7zAic/flash_5.png" />
+        <% end %>
+        <% (5 - review.rating.to_i).times do %>
+          <img src="https://image.ibb.co/k2ExBx/flash_3.png" />
+        <% end %>
+      <% end %>
+      <hr>
+    <h4><b><%= review.title %></b></h4>
+    <p><%= review.description %></p>
+  </div>
+  <% end %>
+</div>
+
+<script>
+  $('.review-bolt-0').click(function(){
+    $('.rating').val("0");
+    $('.review-bolt-0').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+    $('.review-bolt-1').attr('src', 'https://image.ibb.co/k2ExBx/flash_3.png');
+    $('.review-bolt-2').attr('src', 'https://image.ibb.co/k2ExBx/flash_3.png');
+    $('.review-bolt-3').attr('src', 'https://image.ibb.co/k2ExBx/flash_3.png');
+    $('.review-bolt-4').attr('src', 'https://image.ibb.co/k2ExBx/flash_3.png');
+  });
+  $('.review-bolt-1').click(function(){
+    $('.rating').val("1");
+    $('.review-bolt-0').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+    $('.review-bolt-1').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+    $('.review-bolt-2').attr('src', 'https://image.ibb.co/k2ExBx/flash_3.png');
+    $('.review-bolt-3').attr('src', 'https://image.ibb.co/k2ExBx/flash_3.png');
+    $('.review-bolt-4').attr('src', 'https://image.ibb.co/k2ExBx/flash_3.png');
+  });
+  $('.review-bolt-2').click(function(){
+    $('.rating').val("2");
+    $('.review-bolt-0').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+    $('.review-bolt-1').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+    $('.review-bolt-2').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+    $('.review-bolt-3').attr('src', 'https://image.ibb.co/k2ExBx/flash_3.png');
+    $('.review-bolt-4').attr('src', 'https://image.ibb.co/k2ExBx/flash_3.png');
+  });
+  $('.review-bolt-3').click(function(){
+    $('.rating').val("3");
+    $('.review-bolt-0').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+    $('.review-bolt-1').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+    $('.review-bolt-2').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+    $('.review-bolt-3').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+    $('.review-bolt-4').attr('src', 'https://image.ibb.co/k2ExBx/flash_3.png');
+  });
+  $('.review-bolt-4').click(function(){
+    $('.rating').val("4");
+    $('.review-bolt-0').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+    $('.review-bolt-1').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+    $('.review-bolt-2').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+    $('.review-bolt-3').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+    $('.review-bolt-4').attr('src', 'https://image.ibb.co/h7zAic/flash_5.png');
+  });
+</script>
+</div>

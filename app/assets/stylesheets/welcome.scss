@@ -1,3 +1,100 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.index-main {
+  background-color: #171C22;
+  height: 600px;
+  margin-top: -20px;
+}
+
+.index-main-text {
+  margin-top: 50px;
+  min-width: 300px;
+}
+
+.index-main-header {
+  font-size: 50px;
+  line-height: 60px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
+}
+
+body {
+  width: 100%;
+}
+
+.index-cont {
+  margin-top: 0px !important;
+}
+
+
+.index-secondary-text {
+  font-size: 25px;
+  font-weight: bold;
+  color: #267ECA;
+  line-height: 30px;
+}
+
+@media only screen and (max-width: 983px) {
+    .index-cont {
+      text-align: center;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .right2 {
+      margin-top: 50px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+  .no-mobile {
+    visibility: hidden;
+    height: 0px !important;
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .bottom {
+    margin-bottom: 40px;
+  }
+}
+
+.main-button {
+  margin-top: 40px;
+  font-weight: bold !important;
+  border-radius: 0 !important;
+  font-size: 25px !important;
+}
+
+.search {
+  background-color: white;
+  box-shadow: 0px 1px 0px grey;
+
+}
+
+.search-container {
+  margin-top: 10px !important;
+}
+
+
+.home-search {
+  border-radius: 0 !important;
+  height: 40px !important;
+  font-size: 20px !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+
+.search-submit {
+  width: 160px;
+}
+
+.index-fourth-row {
+  height: 300px;
+}
