@@ -13,6 +13,7 @@ class User < ApplicationRecord
    has_many :CounterOffers
    has_many :payouts
    has_many :reviews
+   has_many :entries
 
    validates :username, presence: :true, uniqueness: { case_sensitive: false }
    validate :validate_username

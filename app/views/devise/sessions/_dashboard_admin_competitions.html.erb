@@ -1,0 +1,40 @@
+<div class="admin col-md-10 col-md-push-2">
+
+<h3 class="page-header">
+  <b>Competitions</b>
+  <%= link_to "Activate a New Competition", competitions_path, method: :post, class: 'btn btn-xs btn-success', data: { confirm: "Creating a new competition will set any currently active competitions to inactive and will not be viewable to users. Are you sure you want to continue?" } %>
+  <small class="show-buyer-counter" style="cursor: pointer;">show</small><small class="hide-buyer-counter" style="display: none; cursor: pointer;">hide</small>
+</h3>
+
+<div class="admin-payout buyer-counter3" style="display: none;">
+  <% Competition.all.each_with_index do |comp, index| %>
+    <div class="col-md-12 purchased-gig">
+      <div class="row one">
+        <%= index + 1 %> |
+        <b><%= link_to "#{Competition.competition_name}", comp %></b>
+        <span class="pull-right">
+          <% if comp.active %>
+            <%= link_to "active", comp, method: :put %>
+          <% else %>
+            <%= link_to "inactive", comp, method: :put %>
+          <% end %>
+        </span>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+</div>
+
+<script>
+  $('.hide-buyer-counter').click(function(){
+    $('.buyer-counter3').hide();
+    $('.hide-buyer-counter').hide();
+    $('.show-buyer-counter').show();
+  });
+  $('.show-buyer-counter').click(function(){
+    $('.buyer-counter3').show();
+    $('.hide-buyer-counter').show();
+    $('.show-buyer-counter').hide();
+  });
+</script>

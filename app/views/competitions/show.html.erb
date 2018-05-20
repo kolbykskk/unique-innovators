@@ -1,0 +1,64 @@
+<% if @competition.active == false && current_user.role != "admin" %>
+<div class="container">
+  <% flash[:alert] = "This competition is not active. If you believe this is an error, contact us." %>
+  <% redirect %>
+</div>
+<% else %>
+<div class="container">
+  <%= link_to "New Entry", new_entry_path, class: 'no-rad btn btn-info' %>
+
+  <h3 class="page-header"><span class="glyphicon glyphicon-eye-close"></span> Your Saved Entries <b><span class="badge"><%= pluralize(Entry.where(active: false, user: current_user, competition_id: params[:id]).count, "entry") %></span>
+  <% if Entry.where(active: false, user: current_user, competition_id: params[:id]).count > 1 %>
+    <div class="alert alert-info" style="margin-top: 10px;">Saved entries are <i>not</i> entered into the competition. You must activate your entry to enter.</div>
+  <% end %>
+
+  </h3>
+  <% Entry.where(user: current_user, competition_id: params[:id], active: false).each do |entry| %>
+    <div class="row entry-pending">
+      <div class="col-md-12">
+        <div class="pull-left"><%= link_to "#{entry.title}", entry %></div>
+        <div class="pull-right"><%= link_to "Delete", entry, method: :delete, remote: true %></div>
+        <div class="strip-entry-form">
+          <%= form_tag charges_path do %>
+            <input type="text" name="price" value="<%= entry.price * 100 %>" style="display: none;">
+            <input type="text" name="description" value="<%= entry.title %>" style="display: none;">
+            <input type="text" name="entry" value="<%= entry.id %>" style="display: none;">
+            <script class='stripe-button' src="https://checkout.stripe.com/checkout.js"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-amount="<%= entry.price * 100 %>"
+            data-description="<%= entry.title %>">
+            </script>
+
+            <button type="submit" class="special-button">
+              Activate
+            </button>
+        <% end %>
+      </div>
+      </div>
+    </div>
+  <% end %>
+  <h3 class="page-header">Competition Month: <b><%= Competition.competition_name %></b> <span class="badge"><%= pluralize(Competition.find_by(active: true).entries.count, "entry") %></span></h3>
+  <div class="entries">
+    <% Entry.where(active: true, competition_id: params[:id]).each do |entry| %>
+      <div class="row entry-pending">
+        <div class="col-md-1 pull-left" style="font-size: 20px;">
+          <%= link_to like_entry_path(entry), method: :put do %>
+            <span class="glyphicon glyphicon-chevron-up"></span>
+            <%= entry.get_upvotes.size %>
+          <% end %><br>
+
+          <%= link_to dislike_entry_path(entry), method: :put do %>
+            <span class="glyphicon glyphicon-chevron-down"></span>
+            <%= entry.get_downvotes.size %>
+          <% end %>
+        </div>
+        <div class="col-md-11 not-bold">
+          <b>Title:</b> <%= link_to "#{entry.title}", entry %><br>
+          <b>Description:</b> <%= entry.description.truncate(75) %><br>
+          <b>Posted by:</b> <%= link_to "#{entry.user.username}", entry.user %><br>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<% end %>

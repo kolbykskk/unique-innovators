@@ -47,9 +47,17 @@ gem 'thor', '0.19.1'
 
 gem 'bootstrap-sass'
 
+gem 'acts_as_votable', '~> 0.11.1'
+
+gem 'buttercms-rails'
+
 gem 'devise'
 
 gem 'figaro'
+
+gem 'mail_form'
+
+gem 'simple_form'
 
 gem 'geocoder'
 

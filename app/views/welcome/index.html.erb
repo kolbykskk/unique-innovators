@@ -4,7 +4,9 @@
       <h1 class="index-main-header">Gig Marketplace<br> For Creators of all Kinds<br></h1>
       <p class="index-secondary-text">Work with creators in your area or all online</p>
       <%= link_to "Browse Gigs and Events", gigs_path, class: 'btn btn-info main-button' %><br>
-      <p style="color: white;"><%= link_to "sign up", new_user_registration_path %> or <%= link_to "login", new_user_session_path %></p>
+      <% unless current_user %>
+        <p style="color: white;"><%= link_to "sign up", new_user_registration_path %> or <%= link_to "login", new_user_session_path %></p>
+      <% end %>
     </div>
     <div class="col-md-6 no-mobile">
       <img src="https://image.ibb.co/c2CTb7/mockup.png" class="main-image" height="600px;"/>
@@ -23,6 +25,7 @@
         </div>
         <div class="form-group col-md-1">
           <%= select_tag :radius, options_for_select(['10', '25', '50', '75', '100', '200']), class: 'form-control home-search' %>
+          Radius
         </div>
         <div class="form-group">
           <%= submit_tag "Search", name: nil, class: "btn btn-info search-submit home-search" %>

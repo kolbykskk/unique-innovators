@@ -18,6 +18,106 @@
  @import "bootstrap";
  @import 'chosen';
 
+ .what-were a {
+   color: white !important;
+ }
+
+ .what-were a:hover {
+   color: #e5e5e5 !important;
+ }
+
+ .work-with {
+   background-color: #267ECA;
+ }
+
+ .work-with a {
+   color: white !important;
+ }
+
+ .work-with a:hover {
+   color: #e5e5e5 !important;
+ }
+
+ .not-bold {
+   font-weight: normal;
+ }
+
+ .no-rad {
+   border-radius: 0;
+ }
+
+ .entry-link a {
+   color: white;
+ }
+
+.special-button {
+  border: 0;
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+ .entry-pending {
+   background-color: white;
+   padding: 10px;
+   margin: 0;
+   margin-top: 10px;
+   box-shadow: 0px 1px 0px grey;
+ }
+
+ .next-post a {
+   color: white !important;
+ }
+
+ .next-post {
+   border-radius: 0px !important;
+ }
+
+ .date-cont {
+   margin-bottom: 50px;
+ }
+
+ .date {
+   padding: 20px;
+   background-color: #2B3138;
+   font-size: 20px;
+   color: white;
+   margin: -15px !important;
+   width: 115px;
+ }
+
+ .breadcrumb {
+   border-radius: 0px !important;
+ }
+
+ .thin {
+    font-weight: 500;
+ }
+
+ .blog {
+   color: white;
+   padding-top: 25px;
+   font-weight: bold;
+   margin-top: 0px !important;
+   font-size: 80px;
+ }
+
+.background {
+  background-color: #2B3138;
+  height: 200px;
+}
+
+ .feat-image {
+   height: 200px;
+   width: 305px;
+   padding: 0px 10px 10px 10px;
+ }
+
+ .summ {
+   width: 240px;
+   margin-left: 10px;
+   word-wrap: break-word;
+ }
+
  .grav {
    margin-top: 40px;
  }

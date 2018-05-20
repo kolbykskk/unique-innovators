@@ -26,13 +26,19 @@ class ChargesController < ApplicationController
       currency: 'usd'
     )
 
-    receipt = current_user.receipts.build(gig_id: params[:gig], counter_offer_id: params[:counter_offer], amount: params[:price], seller: Gig.find_by_id(params[:gig]).user_id, completed: false)
-    if receipt.gig.event == true
-      receipt.completed = true
-      receipt.gig.balance += receipt.amount
+    unless params[:entry]
+      receipt = current_user.receipts.build(gig_id: params[:gig], counter_offer_id: params[:counter_offer], amount: params[:price], seller: Gig.find_by_id(params[:gig]).user_id, completed: false)
+      if receipt.gig.event == true
+        receipt.completed = true
+        receipt.gig.balance += receipt.amount
+      end
+      receipt.save!
+      receipt.gig.save!
+    else
+      entry = Entry.find(params[:entry])
+      entry.active = true
+      entry.save!
     end
-    receipt.save!
-    receipt.gig.save!
     flash[:notice] = "Thank you for your purchase, #{current_user.username}!"
     redirect_to "/users/dashboard/#{current_user.id}" # or wherever
 

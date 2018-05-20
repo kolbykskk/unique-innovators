@@ -1,0 +1,33 @@
+<div class="container">
+  <% if @entry.active == false %>
+    <div class="alert alert-info" style="margin-top: 10px;">You must activate this entry before it's entered into the competition.</div>
+  <% end %>
+  <h3 class="page-header">Competition Month: <b><%= Competition.competition_name %></b> <span class="badge"><%= pluralize(Competition.find_by(active: true).entries.count, "entry") %></span></h3>
+  <ol class="breadcrumb">
+    <li class="entry-link"><%= link_to "All Entries", competition_path(Competition.find_by(active: true).id) %></li>
+    <li class="active"><%= @entry.title %></li>
+  </ol>
+  <div class="col-md-4" >
+    <h4><b>Title:</b> <%= @entry.title %></h4>
+    <h4><b>Posted By:</b> <%= link_to "#{@entry.user.username}", @entry.user %></h4>
+    <h4 style="margin-bottom: 50px;"><b>Description:</b><br><hr> <%= @entry.description %></h4>
+  </div>
+  <div class="col-md-8">
+    <div id="myCarousel" class="carousel slide">
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner text-center">
+          <%= render partial: 'gallery' %>
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+</div>

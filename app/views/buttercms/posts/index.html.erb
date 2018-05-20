@@ -1,0 +1,36 @@
+<div class="background no-mobile">
+  <div class="container blog">
+    <img class="blog-img" src="https://image.ibb.co/hxtqdy/influencer.png" height= "160px" />
+    BLOG
+  </div>
+</div>
+<div class="container">
+  <h3 class="page-header"><b>What We're Up To</b></h3>
+
+  <!-- List of posts -->
+
+  <% @posts.each do |post| %>
+  <div class="col-md-4 col-sm-6 col-xs-8" style="margin-top: 20px; width: 350px; margin-left: 25px;">
+    <% if post.featured_image %>
+      <%= link_to buttercms_post_path(post.slug) do %>
+        <%= image_tag(post.featured_image, class: 'feat-image') %>
+      <% end %>
+    <% end %>
+
+    <div class="inside border-right" style="margin-right: -150px; box-shadow: 0px 1px 0px grey; height: 150px; width: 285px; margin-left: 10px; margin-top: -10px;">
+      <%= render :partial => 'post', :locals => {:post => post} %>
+    </div>
+  </div>
+  <% end %>
+
+  <!-- Pagination links -->
+  <div>
+    <% if @previous_page %>
+      <%= link_to "Prev", buttercms_blog_path(:page => @previous_page) %>
+    <% end %>
+
+    <% if @next_page %>
+      <%= link_to "Next", buttercms_blog_path(:page => @next_page) %>
+    <% end %>
+  </div>
+</div>

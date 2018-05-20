@@ -29,6 +29,11 @@
         <div class="collapse navbar-collapse navHeaderCollapse">
           <ul class="nav navbar-nav">
             <li><%= link_to "Home", welcome_index_path %></li>
+            <li><%= link_to "Blog", buttercms_blog_path %></li>
+            <% if Competition.find_by(active: true) %>
+              <li><%= link_to "Competition", competition_path(Competition.find_by(active: true).id) %></li>
+            <% end %>
+            <li class="work-with"><%= link_to "Work With Us", contacts_path %></li>
           </ul>
         <% unless user_signed_in? %>
           <ul class="nav navbar-nav navbar-right">
@@ -99,6 +104,9 @@
         <% end %>
         <%= link_to "http://www.instgram.com" do %>
           <img src="https://image.ibb.co/eAc7Tn/instagram.png" />
+        <% end %>
+        <%= link_to "http://www.youtube.com" do %>
+          <img src="https://image.ibb.co/bFbdWT/youtube.png" />
         <% end %>
 
       </div>

@@ -1,0 +1,23 @@
+<div class="container">
+<div class="col-md-12">
+  <h3 class="page-header"><b>Send us a message!</b></h3>
+
+  <div class="edit_form edit_account" style="padding: 20px;">
+    <%= simple_form_for @contact, :html => {:class => 'form-horizontal' } do |f| %>
+    <div class="form-group">
+      <%= f.text_field :name, :class => "form-control", :required => true, :placeholder => "Name" %>
+    </div>
+      <div class="form-group">
+      <%= f.text_field :email, :class => "form-control", :required => true, :placeholder => "Email" %>
+    </div>
+      <div class="form-group">
+      <%= f.text_area :message, :as => :text, :required => true, :class => "form-control", :placeholder => "Message" %><br>
+      <%= f.button :submit, 'Send message', :class=> "btn btn-primary form-control" %>
+    </div>
+    <div class= "hidden form-group">
+      <%= f.text_field :nickname, :hint => 'Leave this field blank!' %><br>
+    </div>
+  <% end %>
+</div>
+</div>
+</div>

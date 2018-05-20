@@ -1,0 +1,11 @@
+<div>
+  <!-- Featured image -->
+  <div class="summ">
+
+  <!-- Post title -->
+  <h4><%= link_to post.title.truncate(25), buttercms_post_path(post.slug), :title => post.title %></h4>
+
+  <!-- Post summary -->
+  <p><%= post.summary.truncate(100) %></p>
+</div>
+</div>

@@ -22,9 +22,10 @@
 
 <h3 class="page-header">
   <b>Payout Requests</b>
+  <small class="show-buyer-counter2" style="cursor: pointer;">show</small><small class="hide-buyer-counter2" style="display: none; cursor: pointer;">hide</small>
 </h3>
 
-<div class="admin-payout">
+<div class="admin-payout buyer-counter2" style="display: none;">
   <% Payout.all.each do |payout| %>
     <div class="col-md-12 purchased-gig">
       <div class="row one">
@@ -53,3 +54,16 @@
 </div>
 
 </div>
+
+<script>
+  $('.hide-buyer-counter2').click(function(){
+    $('.buyer-counter2').hide();
+    $('.hide-buyer-counter2').hide();
+    $('.show-buyer-counter2').show();
+  });
+  $('.show-buyer-counter2').click(function(){
+    $('.buyer-counter2').show();
+    $('.hide-buyer-counter2').show();
+    $('.show-buyer-counter2').hide();
+  });
+</script>
