@@ -18,6 +18,55 @@
  @import "bootstrap";
  @import 'chosen';
 
+ #myBtn {
+   margin-top: 40px;
+   cursor: pointer;
+ }
+
+ .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    text-align: center;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+ .center {
+   float: none !important;
+   text-align: center;
+ }
+
+ .buttt {
+   font-size: 50px;
+   width: 300px;
+   text-align: center;
+   float: none !important;
+   padding: 10px;
+   font-weight: bold;
+ }
+
  .what-were a {
    color: white !important;
  }
@@ -128,7 +177,7 @@
 
 .main-image {
   position: relative;
-  top: 27px;
+  top: 127px;
 }
 
  #message-scroll {
