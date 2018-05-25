@@ -1,7 +1,7 @@
 <div id="myModal" class="modal">
 
     <span class="close">&times;</span>
-    <iframe height="50%" width="90%" src="https://www.youtube.com/embed/LRblJyq_4Ko" frameborder="0" allowfullscreen></iframe>
+    <iframe height="50%" width="90%" src="https://drive.google.com/file/d/1CUQUjv-jiGyf7bKDVEeNWm9RucufveKl/preview" frameborder="0" allowfullscreen></iframe>
 
 </div>
 
@@ -14,8 +14,6 @@
       <% unless current_user %>
         <p style="color: white;"><%= link_to "sign up", new_user_registration_path %> or <%= link_to "login", new_user_session_path %></p>
       <% end %>
-      <div id="myBtn"><img src="https://image.ibb.co/gOMHgT/play_button.png" /></div>
-
     </div>
     <div class="col-md-6 no-mobile">
       <img src="https://image.ibb.co/c2CTb7/mockup.png" class="main-image" height="600px;"/>
@@ -34,7 +32,7 @@
         </div>
         <div class="form-group col-md-1">
           <%= select_tag :radius, options_for_select(['10', '25', '50', '75', '100', '200']), class: 'form-control home-search' %>
-          Miles
+          Distance/Mileage
         </div>
         <div class="form-group">
           <%= submit_tag "Search", name: nil, class: "btn btn-info search-submit home-search" %>
@@ -45,7 +43,9 @@
 </div>
 <div style="padding-bottom: 50px;">
   <div class="container">
-    <div class="col-md-12 bottom">
+    <div class="col-md-12 bottom text-center">
+      <div id="myBtn"><img src="https://image.ibb.co/gOMHgT/play_button.png" /></div>
+
       <h2 class="text-center"><b>Click the video above to check out the website walkthrough!</b></h2>
     </div>
     <div class="text-center no-mobile">
@@ -70,7 +70,7 @@
       <img src="https://image.ibb.co/dFmmqo/880902371735180999.jpg" height= '300px' width="300px" style="border-radius: 50%"/>
     </div>
     <div class="col-md-8 right2">
-      <h2 style="font-weight: bold;">Get connected with local creators and events in your area</h2>
+      <h2 class="text-center" style="font-weight: bold;">Get connected with local creators and<br> events in your area.</h2>
     </div>
   </div>
 </div>
@@ -80,16 +80,9 @@
     <div class="col-md-4">
       <img src="https://image.ibb.co/isA9jH/ODRADI0.jpg" height= '300px' width="300px" style="border-radius: 50%"/>
     </div>
-    <div class="col-md-8 right2">
-      <h2 style="font-weight: bold;">Join the hottest competition online! Click the link below to get started</h2>
-    </div>
-  </div>
-</div>
-<div style="background-color: white; padding-bottom: 20px;">
-  <div class="container index-cont">
-    <hr>
-    <div class="col-md-12 center">
-      <%= link_to "Join Now!", new_user_session_path, class: 'buttt btn btn-info' %>
+    <div class="col-md-8 right2 text-center">
+      <h2 style="font-weight: bold;">Join the hottest competition online!<br> Click the link below to get started.</h2>
+      <%= link_to "Join Now!", new_user_session_path, class: 'no-rad buttt btn btn-info' %>
     </div>
   </div>
 </div>
