@@ -1,13 +1,13 @@
 <!-- The Modal -->
-<div id="myPopup" class="myPopup">
+<div id="myPopup" class="no-mobile myPopup">
 
  <!-- Modal content -->
- <div class="modal-content text-center">
+ <div class="modal-content text-center no-mobile">
    <span class="close">&times;</span>
-   <h1 class="text-center"><b>Are you a...</b></h1>
+   <h1 class="text-center"><b>Choose one...</b></h1>
    <hr>
-   <div class="btn btn-info dif buttt">Business</div><br><br>
-   <div class="btn btn-info dif buttt">Creator</div>
+   <div class="btn btn-info dif buttt"><%= link_to "Create", new_user_gig_path(current_user) %></div><br><br>
+   <div class="btn btn-info dif buttt"><%= link_to "Build Together", gigs_path %></div>
  </div>
 
 </div>
@@ -145,7 +145,7 @@ var popupspan = document.getElementsByClassName("popupclose")[0];
 // When the user clicks on the button, open the modal
 setTimeout(function() {
   popup.style.display = "block";
-}, 100);
+}, 20000);
 
 // When the user clicks on <span> (x), close the modal
 popupspan.onclick = function() {
