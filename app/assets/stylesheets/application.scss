@@ -18,6 +18,56 @@
  @import "bootstrap";
  @import 'chosen';
 
+ .myPopup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    overflow-y: hidden; // hide vertical
+}
+
+.dif {
+  background-color: #171C22 !important;
+  border-color: white !important;
+}
+
+.dif:hover {
+  background-color: #343a42 !important;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    margin: 7% auto; /* 15% from the top and centered */
+    padding: 20px;
+    color: white;
+    border: 1px solid #888;
+    max-width: 800px;
+    min-height: 500px;
+    background: url("https://preview.ibb.co/dDaULy/IMG_2536.jpg");
+    background-position: center;
+    background-size: cover;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.popupclose {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.popupclose:hover,
+.popupclose:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
  #myBtn {
    cursor: pointer;
  }
