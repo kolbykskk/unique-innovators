@@ -10,6 +10,8 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require easy-autocomplete
+ *= require easy-autocomplete.themes
  *= require_tree .
  *= require_self
  */
@@ -17,6 +19,17 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import 'chosen';
+
+ .autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+
+ .navbar {
+   border-color: white !important;
+   border-radius: 0 !important;
+ }
 
  .myPopup {
     display: none; /* Hidden by default */
@@ -33,6 +46,7 @@
 .dif {
   background-color: #171C22 !important;
   border-color: white !important;
+  border-radius: 0;
 }
 
 .dif:hover {
@@ -47,6 +61,7 @@
     border: 1px solid #888;
     max-width: 800px;
     min-height: 500px;
+    border-radius: 0;
     background: url("https://preview.ibb.co/dDaULy/IMG_2536.jpg");
     background-position: center;
     background-size: cover;

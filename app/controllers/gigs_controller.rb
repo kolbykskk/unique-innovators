@@ -57,6 +57,7 @@ class GigsController < ApplicationController
   end
 
   def index
+    @arr = ['Web Developer', 'Graphic Designer']
     if params[:location].present?
       begin
         @gigs = Gig.where("title LIKE ? AND location LIKE ?", "%#{params[:search]}%", "#{Gig.near(params[:location], params[:radius] || 50)[0].location}").page(params[:page]).per(15)

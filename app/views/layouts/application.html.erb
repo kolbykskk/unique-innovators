@@ -22,13 +22,13 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/">
-            <img alt="Unique Innovators" src="https://image.ibb.co/joU96n/imageedit_5_8038223847.png" height="60px">
+            <img alt="Unique Innovators" src="https://image.ibb.co/joU96n/imageedit_5_8038223847.png" data-turbolinks="false" height="60px">
           </a>
         </div>
 
         <div class="collapse navbar-collapse navHeaderCollapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Home", welcome_index_path %></li>
+            <li data-turbolinks="false"><%= link_to "Home", welcome_index_path %></li>
             <li><%= link_to "Blog", buttercms_blog_path %></li>
             <% if Competition.find_by(active: true) %>
               <li><%= link_to "Competition", competition_path(Competition.find_by(active: true).id) %></li>
@@ -43,7 +43,15 @@
         <% else %>
           <ul class="nav navbar-nav navbar-right">
             <li><%= link_to "Dashboard", "/users/dashboard/#{current_user.id }" %></li>
-            <li><%= link_to "Messages", conversations_path %></li>
+            <li>
+              <%= link_to conversations_path do %>
+                <% if current_user.mailbox.inbox(unread: true).count > 0 %>
+                  <img src="https://image.ibb.co/mEcUmx/idea_1.png"> Messages
+                <% else %>
+                  Messages
+                <% end %>
+              <% end %>
+            </li>
             <li class="dropdown">
               <a class="dropdown-toggle" href="#" data-toggle="dropdown">
                 <span class="glyphicon glyphicon-user"></span> My Account

@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require chosen-jquery
 //= require bootstrap
+//= require jquery.easy-autocomplete
 //= require_tree .
