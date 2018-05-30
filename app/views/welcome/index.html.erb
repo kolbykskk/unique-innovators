@@ -18,8 +18,7 @@
 
 <div id="myModal" class="modal">
 
-    <span class="popupclose">&times;</span>
-    <iframe height="50%" width="90%" src="https://drive.google.com/file/d/1CUQUjv-jiGyf7bKDVEeNWm9RucufveKl/preview" frameborder="0" allowfullscreen></iframe>
+    <iframe class="youtube-video" height="50%" width="90%" src="https://drive.google.com/file/d/1CUQUjv-jiGyf7bKDVEeNWm9RucufveKl/preview" frameborder="0" allowfullscreen></iframe>
 
 </div>
 
@@ -144,17 +143,18 @@ var popup = document.getElementById('myPopup');
 // Get the button that opens the modal
 var popupbtn = document.getElementById("myPopupBtn");
 
-// Get the <span> element that closes the modal
-var popupspan = document.getElementsByClassName("popupclose")[0];
-
 // When the user clicks on the button, open the modal
 setTimeout(function() {
   popup.style.display = "block";
 }, 20000);
 
+var closeit = document.getElementById("myModal");
+
 // When the user clicks on <span> (x), close the modal
-popupspan.onclick = function() {
+closeit.onclick = function() {
     modal.style.display = "none";
+    $('.youtube-video')[0].src="";
+    $('.youtube-video')[0].src="https://drive.google.com/file/d/1CUQUjv-jiGyf7bKDVEeNWm9RucufveKl/preview";
 }
 
 // When the user clicks on <span> (x), close the modal
