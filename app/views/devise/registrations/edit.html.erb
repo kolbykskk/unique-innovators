@@ -49,4 +49,17 @@
     </div>
   <% end %>
 </div>
+<div class="edit_form edit_account" style="padding: 20px;">
+  <% unless current_user.bios.count > 0 %>
+    <%= form_for bio_path(current_user), method: :post, as: :bio do |f| %>
+      <%= f.text_area :description, class: 'form-control' %>
+      <%= f.submit "Save Bio", class: 'btn btn-info butttt' %>
+    <% end %>
+  <% else %>
+    <%= form_for Bio.find(current_user.bios[0].id), method: :put do |f| %>
+      <%= f.text_area :description, value: "#{current_user.bios[0].description}", class: 'form-control' %>
+      <%= f.submit "Update Bio", class: 'btn btn-info butttt' %>
+    <% end %>
+  <% end %>
+</div>
 </div>

@@ -20,6 +20,14 @@
   </div>
 
     <div class="seller col-md-9">
+    <% if current_user.bios.count > 0 %>
+      <div class="bio">
+        <h3 class="page-header">
+          <b><%= @user.username %>'s bio</b>
+        </h3>
+          <%= current_user.bios[0].description %>
+      </div>
+    <% end %>
     <h3 class="page-header"><b>
     <%= @user.username %>'s events <span class="badge"><%= @events.count %></span>
     </b></h3>
@@ -66,11 +74,8 @@
     </div>
   </div>
 
-  <% if @events.count == 0 %>
-    <div class="seller col-md-9">
-  <% else %>
+
     <div class="seller col-md-9 col-md-push-3">
-  <% end %>
    <h3 class="page-header"><b>
       <%= User.find_by_id(params[:id]).username %>'s gigs <span class="badge"><%= @gigs.count %></span>
     </b></h3>

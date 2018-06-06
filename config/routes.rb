@@ -7,8 +7,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :bio
+
+  post "/users/edit" => "bio#create"
+
   match '/contacts', to: 'contacts#new', via: 'get'
-  
+
   resources "contacts", only: [:new, :create]
 
   resources :competitions, only: [:create, :delete, :show, :new, :update]

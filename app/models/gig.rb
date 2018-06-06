@@ -15,9 +15,9 @@ class Gig < ApplicationRecord
   geocoded_by :location
   after_validation :geocode, if: ->(obj){ obj.location.present? and obj.location_changed? }
 
-  validates :title, length: { in: 3..75 }, presence: true
+  validates :title, presence: true
   validates :price, presence: true
-  validates :description, length: { in: 50..1000 }, presence: true
+  validates :description, presence: true
   validates :category, presence: true
   validates :allow, acceptance: { accept: ['Online or Meetups', 'Online Only', 'Meetups Only'] }, presence: true
   validates :location, presence: true, if: :check_if_location_required
