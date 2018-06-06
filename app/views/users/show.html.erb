@@ -62,7 +62,8 @@
               </div>
               <div style="overflow: hidden;"><p class="index-title"><%= link_to "#{event.title}", event %></p></div>
             <% unless event.allow == "Online Only" %>
-              <span class="glyphicon glyphicon-map-marker"></span> <%= event.location %>
+              <span class="glyphicon glyphicon-map-marker"></span>
+              <%= event.location %>
             <% else %>
             <span class="glyphicon glyphicon-map-marker"></span> Online Only, No Meetups
             <% end %>
@@ -110,7 +111,8 @@
               </div>
               <div style="overflow: hidden;"><p class="index-title"><%= link_to "#{gig.title}", gig %></p></div>
             <% unless gig.allow == "Online Only" %>
-              <span class="glyphicon glyphicon-map-marker"></span> <%= gig.location %>
+              <span class="glyphicon glyphicon-map-marker"></span>
+              <%= gig.location %>
             <% else %>
             <span class="glyphicon glyphicon-map-marker"></span> Online Only, No Meetups
             <% end %>
