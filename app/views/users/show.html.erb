@@ -77,8 +77,12 @@
     </div>
   </div>
 
-
+  <% if current_user.bios.count > 0 || Gig.where(user: current_user, event: true).count > 0  %>
     <div class="seller col-md-9 col-md-push-3">
+  <% else %>
+    <div class="seller col-md-9">
+  <% end %>
+
    <h3 class="page-header"><b>
       <%= User.find_by_id(params[:id]).username %>'s gigs <span class="badge"><%= @gigs.count %></span>
     </b></h3>

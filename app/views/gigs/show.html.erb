@@ -114,14 +114,17 @@
       <% end %>
     <% end %>
     <% unless current_user && current_user != @gig.user %>
-      <button class="stripe-buy btn btn-success" disabled>
+    <%= link_to new_user_session_path do %>
+      <button class="stripe-buy btn btn-success">
         <% if @gig.event == true %>
         <span class="pull-left">Purchase a ticket for this event</span>
         <% else %>
-        <span class="pull-left">Purchase this gig - <%= @gig.delivery_time %> delivery time</span>
+        <span class="pull-left">
+          Purchase this gig - <%= @gig.delivery_time %> delivery time</span>
         <% end %>
         <span class="pull-right">$<%= @gig.price.floor %></span>
       </button>
+      <% end %>
     <% end %>
     </div>
 
@@ -137,8 +140,10 @@
         <% end %>
       <% end %>
       <% unless show_counter_offer %>
-        <input class="pull-left counter-field" type="number" placeholder='$' disabled>
-        <input class="counter-offer btn btn-warning" value="Submit Counter Offer" disabled>
+        <input class="pull-left counter-field" type="number" placeholder='$'>
+        <%= link_to new_user_session_path do %>
+          <input class="counter-offer btn btn-warning" value="Submit Counter Offer">
+        <% end %>
       <% end %>
     </div>
   <% end %>

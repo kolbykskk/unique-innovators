@@ -1,5 +1,8 @@
 <div class="seller col-md-10 col-md-push-2">
   <h3 class="page-header"><b>
+    <% if CounterOffer.where(seller: current_user.id, declined: false, accepted: false).count > 0 %>
+      <img src="https://image.ibb.co/mEcUmx/idea_1.png">
+    <% end %>
     Your received counter offers <span class="badge"><%= CounterOffer.where(seller: current_user.id).count %></span> <small class="show-seller-counter" style="cursor: pointer;">show</small><small class="hide-seller-counter" style="display: none; cursor: pointer;">hide</small>
   </b></h3>
 
