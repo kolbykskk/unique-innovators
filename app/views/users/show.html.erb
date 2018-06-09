@@ -77,7 +77,13 @@
     </div>
   </div>
 
-  <% if current_user.bios.count > 0 || Gig.where(user: current_user, event: true).count > 0  %>
+<% if current_user %>
+  <% if @user.bios.count > 0 || Gig.where(user: @user, event: true).count > 0  %>
+    <div class="seller col-md-9 col-md-push-3">
+  <% else %>
+    <div class="seller col-md-9">
+  <% end %>
+  <% elsif Gig.where(user: @user, event: true).count > 0 %>
     <div class="seller col-md-9 col-md-push-3">
   <% else %>
     <div class="seller col-md-9">

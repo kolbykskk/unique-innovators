@@ -9,7 +9,13 @@ Rails.application.routes.draw do
 
   resources :bio
 
+  resources :profile_pic
+
+  post "/profile_pic/:id" => "profile_pics#create"
+
   post "/users/edit" => "bio#create"
+
+  post "/users/edit" => "profile_pic#create"
 
   match '/contacts', to: 'contacts#new', via: 'get'
 

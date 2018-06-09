@@ -28,7 +28,7 @@
       <h1 class="index-main-header">Marketplace for Creators<br> and Events of All Kinds<br></h1>
       <p class="index-secondary-text">Work with Artist, musicians, web developers, freelance writers, photographers, videographers and much more in your area or across the globe online</p>
       <div data-turbolinks="false">
-        <%= link_to "Browse Gigs and Events", gigs_path, class: 'btn btn-info main-button' %><br>
+        <%= link_to "Join Now", new_user_registration_path, class: 'btn btn-info main-button' %><br>
       </div>
       <% unless current_user %>
         <p style="color: white;"><%= link_to "sign up", new_user_registration_path %> or <%= link_to "login", new_user_session_path %></p>
@@ -88,8 +88,9 @@
     <div class="col-md-4">
       <img src="https://image.ibb.co/dFmmqo/880902371735180999.jpg" height= '300px' width="300px" style="border-radius: 50%"/>
     </div>
-    <div class="col-md-8 right2">
+    <div class="col-md-8 right2 text-center">
       <h2 class="text-center" style="font-weight: bold;">Get connected with local creators and<br> events in your area.</h2>
+      <%= link_to "Browse Gigs and Events", gigs_path, class: 'no-rad butttt btn btn-info' %>
     </div>
   </div>
 </div>
