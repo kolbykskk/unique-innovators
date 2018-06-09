@@ -1,3 +1,533 @@
+/*
+ * easy-autocomplete
+ * jQuery plugin for autocompletion
+ * 
+ * @author Łukasz Pawełczak (http://github.com/pawelczak)
+ * @version 1.3.5
+ * Copyright  License: 
+ */
+
+
+.easy-autocomplete {
+  position: relative;
+}
+.easy-autocomplete input {
+  border-color: #ccc;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+  color: #555;
+  float: none;
+  padding: 6px 12px;
+}
+.easy-autocomplete input:hover, .easy-autocomplete input:focus {
+  box-shadow: none;
+}
+.easy-autocomplete a {
+  display: block;
+}
+.easy-autocomplete.eac-blue-light input:hover, .easy-autocomplete.eac-blue-light input:focus {
+  border-color: #66afe9;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+}
+.easy-autocomplete.eac-blue-light ul {
+  border-color: #66afe9;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+}
+.easy-autocomplete.eac-blue-light ul li, .easy-autocomplete.eac-blue-light ul .eac-category {
+  border-color: #66afe9;
+}
+.easy-autocomplete.eac-blue-light ul li.selected, .easy-autocomplete.eac-blue-light ul .eac-category.selected {
+  background-color: #ecf5fc;
+}
+.easy-autocomplete.eac-green-light input:hover, .easy-autocomplete.eac-green-light input:focus {
+  border-color: #41DB00;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(146, 237, 107, 0.6);
+}
+.easy-autocomplete.eac-green-light ul {
+  border-color: #41DB00;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(146, 237, 107, 0.6);
+}
+.easy-autocomplete.eac-green-light ul li, .easy-autocomplete.eac-green-light ul .eac-category {
+  border-color: #41DB00;
+}
+.easy-autocomplete.eac-green-light ul li.selected, .easy-autocomplete.eac-green-light ul .eac-category.selected {
+  background-color: #9eff75;
+}
+.easy-autocomplete.eac-red-light input:hover, .easy-autocomplete.eac-red-light input:focus {
+  border-color: #ff5b5b;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 90, 90, 0.6);
+}
+.easy-autocomplete.eac-red-light ul {
+  border-color: #ff5b5b;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 90, 90, 0.6);
+}
+.easy-autocomplete.eac-red-light ul li, .easy-autocomplete.eac-red-light ul .eac-category {
+  border-color: #ff5b5b;
+}
+.easy-autocomplete.eac-red-light ul li.selected, .easy-autocomplete.eac-red-light ul .eac-category.selected {
+  background-color: #ff8e8e;
+}
+.easy-autocomplete.eac-yellow-light input:hover, .easy-autocomplete.eac-yellow-light input:focus {
+  border-color: #ffdb00;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 231, 84, 0.6);
+}
+.easy-autocomplete.eac-yellow-light ul {
+  border-color: #ffdb00;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 231, 84, 0.6);
+}
+.easy-autocomplete.eac-yellow-light ul li, .easy-autocomplete.eac-yellow-light ul .eac-category {
+  border-color: #ffdb00;
+}
+.easy-autocomplete.eac-yellow-light ul li.selected, .easy-autocomplete.eac-yellow-light ul .eac-category.selected {
+  background-color: #ffe233;
+}
+.easy-autocomplete.eac-dark-light input:hover, .easy-autocomplete.eac-dark-light input:focus {
+  border-color: #333;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(55, 55, 55, 0.6);
+}
+.easy-autocomplete.eac-dark-light ul {
+  border-color: #333;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(55, 55, 55, 0.6);
+}
+.easy-autocomplete.eac-dark-light ul li, .easy-autocomplete.eac-dark-light ul .eac-category {
+  border-color: #333;
+}
+.easy-autocomplete.eac-dark-light ul li.selected, .easy-autocomplete.eac-dark-light ul .eac-category.selected {
+  background-color: #4d4d4d;
+  color: #fff;
+}
+.easy-autocomplete.eac-dark {
+  color: #fff;
+}
+.easy-autocomplete.eac-dark input {
+  background-color: #404040;
+  border-radius: 4px;
+  box-shadow: 0;
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-dark input:hover, .easy-autocomplete.eac-dark input:focus {
+  border-color: #333;
+  box-shadow: 0;
+}
+.easy-autocomplete.eac-dark ul {
+  border-color: #333;
+}
+.easy-autocomplete.eac-dark ul li, .easy-autocomplete.eac-dark ul .eac-category {
+  background-color: #404040;
+  border-color: #333;
+}
+.easy-autocomplete.eac-dark ul li.selected, .easy-autocomplete.eac-dark ul .eac-category.selected {
+  background-color: #737373;
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-dark-glass {
+  color: #fff;
+}
+.easy-autocomplete.eac-dark-glass input {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+  box-shadow: 0;
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-dark-glass input:hover, .easy-autocomplete.eac-dark-glass input:focus {
+  border-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0;
+}
+.easy-autocomplete.eac-dark-glass ul {
+  border-color: rgba(0, 0, 0, 0.8);
+}
+.easy-autocomplete.eac-dark-glass ul li, .easy-autocomplete.eac-dark-glass ul .eac-category {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-color: rgba(0, 0, 0, 0.8);
+}
+.easy-autocomplete.eac-dark-glass ul li.selected, .easy-autocomplete.eac-dark-glass ul .eac-category.selected {
+  background-color: rgba(64, 64, 64, 0.8);
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-dark-glass ul li:last-child, .easy-autocomplete.eac-dark-glass ul .eac-category:last-child {
+  border-radius: 0 0 4px 4px;
+}
+.easy-autocomplete.eac-blue {
+  color: #fff;
+}
+.easy-autocomplete.eac-blue input {
+  background-color: #6d9ed1;
+  border-radius: 4px;
+  box-shadow: 0;
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-blue input::-webkit-input-placeholder {
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-blue input:-moz-placeholder {
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-blue input::-moz-placeholder {
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-blue input:-ms-input-placeholder {
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-blue input:hover, .easy-autocomplete.eac-blue input:focus {
+  border-color: #5A91CB;
+  box-shadow: 0;
+}
+.easy-autocomplete.eac-blue ul {
+  border-color: #5A91CB;
+}
+.easy-autocomplete.eac-blue ul li, .easy-autocomplete.eac-blue ul .eac-category {
+  background-color: #6d9ed1;
+  border-color: #5A91CB;
+}
+.easy-autocomplete.eac-blue ul li.selected, .easy-autocomplete.eac-blue ul .eac-category.selected {
+  background-color: #94b8dd;
+  color: #f6f6f6;
+}
+.easy-autocomplete.eac-yellow {
+  color: #333;
+}
+.easy-autocomplete.eac-yellow input {
+  background-color: #ffdb7e;
+  border-color: #333;
+  border-radius: 4px;
+  box-shadow: 0;
+  color: #333;
+}
+.easy-autocomplete.eac-yellow input:hover, .easy-autocomplete.eac-yellow input:focus {
+  border-color: #333;
+  box-shadow: 0;
+}
+.easy-autocomplete.eac-yellow ul {
+  border-color: #333;
+}
+.easy-autocomplete.eac-yellow ul li, .easy-autocomplete.eac-yellow ul .eac-category {
+  background-color: #ffdb7e;
+  border-color: #333;
+}
+.easy-autocomplete.eac-yellow ul li.selected, .easy-autocomplete.eac-yellow ul .eac-category.selected {
+  background-color: #ffe9b1;
+  color: #333;
+}
+.easy-autocomplete.eac-purple {
+  color: #333;
+}
+.easy-autocomplete.eac-purple input {
+  background-color: #d6d1e7;
+  border-color: #b8afd5;
+  box-shadow: 0;
+  color: #333;
+}
+.easy-autocomplete.eac-purple input:hover, .easy-autocomplete.eac-purple input:focus {
+  border-color: #333;
+  box-shadow: 0;
+}
+.easy-autocomplete.eac-purple ul {
+  border-color: #333;
+}
+.easy-autocomplete.eac-purple ul li, .easy-autocomplete.eac-purple ul .eac-category {
+  background-color: #d6d1e7;
+  border-color: #333;
+}
+.easy-autocomplete.eac-purple ul li.selected, .easy-autocomplete.eac-purple ul .eac-category.selected {
+  background-color: #ebe8f3;
+  color: #333;
+}
+.easy-autocomplete.eac-bootstrap input {
+  border-color: #ccc;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  color: #555;
+  padding: 6px 12px;
+}
+
+.easy-autocomplete-container {
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+.easy-autocomplete-container ul {
+  background: none repeat scroll 0 0 #ffffff;
+  border-top: 1px dotted #ccc;
+  display: none;
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  position: relative;
+  top: -1px;
+}
+.easy-autocomplete-container ul li, .easy-autocomplete-container ul .eac-category {
+  background: inherit;
+  border-color: #ccc;
+  border-image: none;
+  border-style: solid;
+  border-width: 0 1px;
+  display: block;
+  font-size: 14px;
+  font-weight: normal;
+  padding: 4px 12px;
+}
+.easy-autocomplete-container ul li:last-child {
+  border-radius: 0 0 2px 2px;
+  border-width: 0 1px 1px;
+}
+.easy-autocomplete-container ul li.selected {
+  background: none repeat scroll 0 0 #ebebeb;
+  cursor: pointer;
+}
+.easy-autocomplete-container ul li.selected div {
+  font-weight: normal;
+}
+.easy-autocomplete-container ul li div {
+  display: block;
+  font-weight: normal;
+  word-break: break-all;
+}
+.easy-autocomplete-container ul li b {
+  font-weight: bold;
+}
+.easy-autocomplete-container ul .eac-category {
+  font-color: #aaa;
+  font-style: italic;
+}
+
+.eac-description .eac-item span {
+  color: #aaa;
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+.eac-icon-left .eac-item img {
+  margin-right: 4px;
+  max-height: 30px;
+}
+
+.eac-icon-right .eac-item {
+  margin-top: 8px;
+  min-height: 24px;
+  position: relative;
+}
+.eac-icon-right .eac-item img {
+  margin-left: 4px;
+  max-height: 30px;
+  position: absolute;
+  right: -4px;
+  top: -8px;
+}
+
+/*# sourceMappingURL=easy-autocomplete.css.map */
+/*
+ * easy-autocomplete
+ * jQuery plugin for autocompletion
+ * 
+ * @author Łukasz Pawełczak (http://github.com/pawelczak)
+ * @version 1.3.5
+ * Copyright  License: 
+ */
+
+
+.easy-autocomplete {
+  /* Theme Square */
+  /* Round */
+  /* Funky */
+  /* Solid */
+  /* Plate */
+}
+.easy-autocomplete.eac-square {
+  font-family: "Roboto", "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.easy-autocomplete.eac-square input {
+  border: 1px solid #7f8c8d;
+  border-radius: 0;
+  color: #7f8c8d;
+  font-family: inherit;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 300;
+  margin: 0;
+  min-width: 350px;
+  padding: 12px 43px 12px 15px;
+}
+.easy-autocomplete.eac-square ul {
+  border-color: #7f8c8d;
+  border-top: 0;
+  box-shadow: none;
+  top: 0;
+}
+.easy-autocomplete.eac-square ul li, .easy-autocomplete.eac-square ul .eac-category {
+  border-color: #7f8c8d;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 6px 12px;
+  transition: all 0.4s ease 0s;
+}
+.easy-autocomplete.eac-square ul li *, .easy-autocomplete.eac-square ul .eac-category * {
+  font-weight: 300;
+}
+.easy-autocomplete.eac-square ul li.selected, .easy-autocomplete.eac-square ul .eac-category.selected {
+  background-color: #f1f1f1;
+  font-weight: 300;
+}
+.easy-autocomplete.eac-square ul li b, .easy-autocomplete.eac-square ul .eac-category b {
+  font-weight: 600;
+}
+.easy-autocomplete.eac-round {
+  font-family: "Open Sans", "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.easy-autocomplete.eac-round input {
+  border: 2px solid #888;
+  border-radius: 10px;
+  color: #888;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  min-width: 300px;
+  padding: 10px;
+}
+.easy-autocomplete.eac-round input:hover, .easy-autocomplete.eac-round input:focus {
+  border-color: #3079ed;
+}
+.easy-autocomplete.eac-round ul {
+  background: none;
+  border-color: #888;
+  border-width: 0;
+  box-shadow: none;
+  min-width: 300px;
+  top: 20px;
+}
+.easy-autocomplete.eac-round ul li, .easy-autocomplete.eac-round ul .eac-category {
+  background: #fff;
+  border-color: #3079ed;
+  border-width: 0 2px;
+  font-size: 14px;
+  padding: 8px 12px;
+  transition: all 0.4s ease 0s;
+}
+.easy-autocomplete.eac-round ul li.selected, .easy-autocomplete.eac-round ul .eac-category.selected {
+  background-color: #d4e3fb;
+}
+.easy-autocomplete.eac-round ul li:first-child, .easy-autocomplete.eac-round ul .eac-category:first-child {
+  border-radius: 10px 10px 0 0;
+  border-width: 2px 2px 0;
+}
+.easy-autocomplete.eac-round ul li:last-child, .easy-autocomplete.eac-round ul .eac-category:last-child {
+  border-radius: 0 0 10px 10px;
+  border-width: 0 2px 2px;
+}
+.easy-autocomplete.eac-round ul li b, .easy-autocomplete.eac-round ul .eac-category b {
+  font-weight: 700;
+}
+.easy-autocomplete.eac-funky {
+  font-family: "Inconsolata", "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.easy-autocomplete.eac-funky input {
+  background: #07ED89;
+  border: 0;
+  border-radius: 0;
+  color: #ED076B;
+  font-family: inherit;
+  font-size: 18px;
+  min-width: 240px;
+  padding: 12px;
+}
+.easy-autocomplete.eac-funky ul {
+  background: transparent;
+  border: 0;
+}
+.easy-autocomplete.eac-funky ul li, .easy-autocomplete.eac-funky ul .eac-category {
+  background: transparent;
+  border: 0;
+  color: #ED076B;
+  font-size: 18px;
+  padding: 4px 12px;
+  transition: all 0.4s ease 0s;
+}
+.easy-autocomplete.eac-funky ul li.selected, .easy-autocomplete.eac-funky ul .eac-category.selected {
+  color: #8907ED;
+}
+.easy-autocomplete.eac-solid input {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15) inset;
+  border-color: #ddd;
+  color: #666;
+  font-size: 13px;
+  min-height: 0;
+  padding: 6px 12px;
+}
+.easy-autocomplete.eac-solid ul li, .easy-autocomplete.eac-solid ul .eac-category {
+  transition: all 0.4s ease 0s;
+}
+.easy-autocomplete.eac-solid ul li.selected, .easy-autocomplete.eac-solid ul .eac-category.selected {
+  background-color: #f2f2f2;
+}
+.easy-autocomplete.eac-plate {
+  font-family: "Open Sans", "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.easy-autocomplete.eac-plate input {
+  font-size: 13px;
+  padding: 6px 12px;
+}
+.easy-autocomplete.eac-plate ul {
+  background: #b5b5b5;
+  border-radius: 6px;
+  border-width: 0;
+  top: 10px;
+}
+.easy-autocomplete.eac-plate ul li, .easy-autocomplete.eac-plate ul .eac-category {
+  background: #b5b5b5;
+  color: #FAFAFA;
+  font-size: 12px;
+  transition: all 0.4s ease 0s;
+}
+.easy-autocomplete.eac-plate ul li b, .easy-autocomplete.eac-plate ul .eac-category b {
+  color: #ffd464;
+}
+.easy-autocomplete.eac-plate ul li.selected, .easy-autocomplete.eac-plate ul .eac-category.selected {
+  background: #656565;
+}
+.easy-autocomplete.eac-plate ul li:first-child, .easy-autocomplete.eac-plate ul .eac-category:first-child {
+  border-radius: 6px 6px 0 0;
+}
+.easy-autocomplete.eac-plate ul li:last-child, .easy-autocomplete.eac-plate ul .eac-category:last-child {
+  border-radius: 0 0 6px 6px;
+}
+.easy-autocomplete.eac-plate-dark {
+  font-family: "Open Sans", "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.easy-autocomplete.eac-plate-dark input {
+  font-size: 13px;
+  padding: 6px 12px;
+}
+.easy-autocomplete.eac-plate-dark ul {
+  background: #212121;
+  border-radius: 6px;
+  border-width: 0;
+  top: 10px;
+}
+.easy-autocomplete.eac-plate-dark ul li, .easy-autocomplete.eac-plate-dark ul .eac-category {
+  background: #212121;
+  color: #FAFAFA;
+  font-size: 12px;
+  transition: all 0.4s ease 0s;
+}
+.easy-autocomplete.eac-plate-dark ul li b, .easy-autocomplete.eac-plate-dark ul .eac-category b {
+  color: #ffd464;
+}
+.easy-autocomplete.eac-plate-dark ul li.selected, .easy-autocomplete.eac-plate-dark ul .eac-category.selected {
+  background: #656565;
+}
+.easy-autocomplete.eac-plate-dark ul li:first-child, .easy-autocomplete.eac-plate-dark ul .eac-category:first-child {
+  border-radius: 6px 6px 0 0;
+}
+.easy-autocomplete.eac-plate-dark ul li:last-child, .easy-autocomplete.eac-plate-dark ul .eac-category:last-child {
+  border-radius: 0 0 6px 6px;
+}
+
+/*# sourceMappingURL=easy-autocomplete.themes.css.map */
 /* line 5, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 body {
   background-color: #F9F9F9 !important;
@@ -261,45 +791,47 @@ body {
 /* line 229, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .index-card {
   background-color: white;
-  height: 225px;
+  height: 270px;
   margin-bottom: 15px;
   padding: 15px;
+  white-space: normal;
+  word-break: break-all;
   box-shadow: 0px 1px 0px grey;
 }
 
-/* line 238, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 239, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .index-card2 {
   height: 200px;
   margin-bottom: 15px;
   padding: 15px;
 }
 
-/* line 243, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 245, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .gig-main {
   margin-bottom: 15px;
 }
 
-/* line 247, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 249, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .gig-title {
   font-weight: bold;
 }
 
-/* line 251, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 253, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .gig-header {
   word-wrap: break-word;
 }
 
-/* line 255, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 257, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .gig-map {
   margin-bottom: 15px;
 }
 
-/* line 259, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 261, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .stripe-button-container {
   margin-bottom: 15px;
 }
 
-/* line 263, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 265, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .stripe-buy {
   width: 100%;
   height: 50px;
@@ -308,57 +840,57 @@ body {
   border-radius: 0px !important;
 }
 
-/* line 271, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 273, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .stripe-button-el {
   display: none !important;
 }
 
-/* line 275, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 277, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .gig-gravatar {
   border-radius: 75px;
 }
 
-/* line 279, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 281, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .gig-user {
   text-align: center;
 }
 
 @media (max-width: 992px) {
-  /* line 285, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+  /* line 287, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
   .gig-user-container {
     margin-top: 65px !important;
   }
 }
-/* line 290, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 292, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .inside {
   background-color: white;
   box-shadow: 0 0 1px gray;
   padding: 15px;
 }
 
-/* line 297, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 299, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .desc {
   margin-top: 15px;
 }
 
-/* line 301, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 303, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .carousel-inner {
   max-height: 500px;
 }
 
-/* line 305, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 307, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .carousel-inner > .item > img {
   margin: 0 auto;
   max-width: 100%;
 }
 
-/* line 310, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 312, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .carousel-inner > .item > video {
   margin: 0 auto;
   max-width: 100%;
 }
 
-/* line 315, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 317, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .playpause {
   background-image: url(https://image.ibb.co/dt3icH/right_arrow.png);
   background-repeat: no-repeat;
@@ -374,12 +906,12 @@ body {
   background-position: center;
 }
 
-/* line 330, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 332, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 #map {
   height: 300px;
 }
 
-/* line 334, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
+/* line 336, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/gigs.scss */
 .search-form {
   text-align: center;
 }
@@ -415,7 +947,7 @@ body {
 /* line 5, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/welcome.scss */
 .index-main {
   background-color: #171C22;
-  height: 600px;
+  height: 643px;
   margin-top: -20px;
 }
 
@@ -530,6 +1062,8 @@ body {
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+
+
 
 
  */
@@ -9835,43 +10369,325 @@ button.close {
   background: url("chosen-sprite.png") no-repeat -30px -20px;
 }
 
-/* line 22, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 24, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.bio {
+  background-color: #267ECA;
+  padding: 10px;
+  margin-top: 25px;
+  color: white;
+}
+
+/* line 31, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.butttt {
+  margin-top: 35px;
+}
+
+/* line 35, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+
+/* line 41, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.navbar {
+  border-color: white !important;
+  border-radius: 0 !important;
+}
+
+/* line 46, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.myPopup {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+  overflow-y: hidden;
+}
+
+/* line 58, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.dif {
+  background-color: #171C22 !important;
+  border-color: white !important;
+  border-radius: 0;
+}
+
+/* line 64, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.dif:hover {
+  background-color: #343a42 !important;
+}
+
+/* Modal Content/Box */
+/* line 69, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.modal-content {
+  margin: 7% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  color: white;
+  border: 1px solid #888;
+  max-width: 800px;
+  min-height: 500px;
+  border-radius: 0;
+  background: url("https://preview.ibb.co/dDaULy/IMG_2536.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 80%;
+  /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+/* line 84, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.popupclose {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* line 91, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.popupclose:hover,
+.popupclose:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* line 98, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+#myBtn {
+  cursor: pointer;
+}
+
+/* line 102, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  text-align: center;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* The Close Button */
+/* line 118, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* line 125, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* line 132, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.center {
+  float: none !important;
+  text-align: center;
+}
+
+/* line 137, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.buttt {
+  font-size: 30px;
+  width: 250px;
+  text-align: center;
+  float: none !important;
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* line 146, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.buttt a {
+  color: white !important;
+}
+
+/* line 150, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.what-were a {
+  color: white !important;
+}
+
+/* line 154, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.what-were a:hover {
+  color: #e5e5e5 !important;
+}
+
+/* line 158, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.work-with {
+  background-color: #267ECA;
+}
+
+/* line 162, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.work-with a {
+  color: white !important;
+}
+
+/* line 166, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.work-with a:hover {
+  color: #e5e5e5 !important;
+}
+
+/* line 170, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.not-bold {
+  font-weight: normal;
+}
+
+/* line 174, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.no-rad {
+  border-radius: 0;
+}
+
+/* line 178, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.entry-link a {
+  color: white;
+}
+
+/* line 182, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.special-button {
+  border: 0;
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+/* line 188, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.entry-pending {
+  background-color: white;
+  padding: 10px;
+  margin: 0;
+  margin-top: 10px;
+  box-shadow: 0px 1px 0px grey;
+}
+
+/* line 196, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.next-post a {
+  color: white !important;
+}
+
+/* line 200, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.next-post {
+  border-radius: 0px !important;
+}
+
+/* line 204, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.date-cont {
+  margin-bottom: 50px;
+}
+
+/* line 208, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.date {
+  padding: 20px;
+  background-color: #2B3138;
+  font-size: 20px;
+  color: white;
+  margin: -15px !important;
+  width: 115px;
+}
+
+/* line 217, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.breadcrumb {
+  border-radius: 0px !important;
+}
+
+/* line 221, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.thin {
+  font-weight: 500;
+}
+
+/* line 225, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.blog {
+  color: white;
+  padding-top: 25px;
+  font-weight: bold;
+  margin-top: 0px !important;
+  font-size: 80px;
+}
+
+/* line 233, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.background {
+  background-color: #2B3138;
+  height: 200px;
+}
+
+/* line 238, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.feat-image {
+  height: 200px;
+  width: 305px;
+  padding: 0px 10px 10px 10px;
+}
+
+/* line 244, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+.summ {
+  width: 240px;
+  margin-left: 10px;
+  word-wrap: break-word;
+}
+
+/* line 250, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .grav {
   margin-top: 40px;
 }
 
-/* line 26, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 254, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .btn-info {
   padding: 3px 10px !important;
 }
 
-/* line 30, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 258, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .main-image {
   position: relative;
-  top: 27px;
+  top: 70px;
 }
 
-/* line 35, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 263, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 #message-scroll {
   padding-right: 5px;
 }
 
-/* line 39, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 267, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 a {
   text-decoration: none !important;
 }
 
-/* line 43, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 271, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .gig-user a {
   text-decoration: none;
 }
 
-/* line 47, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 275, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .index-user-2 a {
   text-decoration: none;
 }
 
-/* line 51, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 279, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .tags {
   list-style: none;
   margin: 0;
@@ -9879,12 +10695,12 @@ a {
   padding: 0;
 }
 
-/* line 58, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 286, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .tags li {
   float: left;
 }
 
-/* line 62, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 290, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .tag {
   background: #267eca;
   border-radius: 3px 0 0 3px;
@@ -9900,7 +10716,7 @@ a {
   -webkit-transition: color 0.2s;
 }
 
-/* line 77, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 305, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .tag::before {
   background: #fff;
   border-radius: 10px;
@@ -9913,7 +10729,7 @@ a {
   top: 10px;
 }
 
-/* line 89, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 317, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .tag::after {
   background: #fff;
   border-bottom: 13px solid transparent;
@@ -9925,27 +10741,27 @@ a {
   top: 0;
 }
 
-/* line 100, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 328, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .eventtab {
   cursor: pointer;
 }
 
-/* line 104, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 332, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .gigtab {
   cursor: pointer;
 }
 
-/* line 108, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 336, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .container {
   margin-top: 20px;
 }
 
-/* line 112, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 340, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .search {
   margin-top: -10px;
 }
 
-/* line 116, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 344, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .alert .alert-danger {
   background-color: #FF7070;
   text-align: left !important;
@@ -9953,20 +10769,20 @@ a {
   color: white !important;
 }
 
-/* line 123, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 351, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 html {
   height: 100%;
   box-sizing: border-box;
 }
 
-/* line 128, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 356, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 *,
 *:before,
 *:after {
   box-sizing: inherit;
 }
 
-/* line 134, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 362, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 body {
   position: relative;
   margin: 0;
@@ -9974,7 +10790,7 @@ body {
   min-height: 100%;
 }
 
-/* line 141, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 369, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .home-search2 {
   border-radius: 0 !important;
   height: 35px !important;
@@ -9986,12 +10802,12 @@ body {
   text-overflow: '';
 }
 
-/* line 152, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 380, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .convo-btn {
   font-size: 14px;
 }
 
-/* line 156, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 384, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .home-search3 {
   border-radius: 0 !important;
   height: 35px !important;
@@ -10003,7 +10819,7 @@ body {
   text-overflow: '';
 }
 
-/* line 167, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 395, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .footer-1 {
   height: 175px;
   background-color: #2b3138;
@@ -10016,14 +10832,14 @@ body {
   text-align: center;
 }
 
-/* line 179, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 407, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .edit_account {
   background-color: white;
   padding: 10px;
   box-shadow: 0px 1px 0px grey;
 }
 
-/* line 185, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 413, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .footer-2 {
   background-color: #171C22;
   position: absolute;
@@ -10036,65 +10852,65 @@ body {
   text-align: center;
 }
 
-/* line 197, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 425, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .gig-review {
   box-shadow: 0px 1px 0px grey;
   border-radius: 0px;
 }
 
-/* line 202, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 430, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .review-form {
   box-shadow: 0px 1px 0px grey;
 }
 
-/* line 206, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 434, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .chosen-search-input {
   padding: 5px !important;
 }
 
-/* line 210, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 438, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 input {
   border-radius: 0px !important;
 }
 
-/* line 214, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 442, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 textarea {
   border-radius: 0px !important;
 }
 
-/* line 218, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 446, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .charge-form {
   width: 100px !important;
 }
 
-/* line 227, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 455, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .carousel-control {
   background-image: none !important;
 }
 
-/* line 231, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 459, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .convo-recipients {
   margin-bottom: -10px;
 }
 
-/* line 235, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 463, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .convo-container {
   background-color: white;
   padding: 10px;
   box-shadow: 0px 1px 0px grey;
 }
 
-/* line 241, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 469, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .glyphicon-chevron-right {
   color: black !important;
 }
 
-/* line 245, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 473, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .glyphicon-chevron-left {
   color: black !important;
 }
 
-/* line 250, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 478, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .edit_gig {
   max-width: 800px;
   box-shadow: 0px 1px 0px grey;
@@ -10102,7 +10918,7 @@ textarea {
   padding: 10px;
 }
 
-/* line 257, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 485, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .new_gig {
   max-width: 800px;
   box-shadow: 0px 1px 0px grey;
@@ -10110,23 +10926,23 @@ textarea {
   padding: 10px;
 }
 
-/* line 264, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 492, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .price {
   width: 150px;
 }
 
-/* line 268, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 496, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .form-group {
   padding: 10px;
 }
 
-/* line 272, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 500, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .show-buyer {
   margin-bottom: 10px;
   cursor: pointer;
 }
 
-/* line 277, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 505, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .show-admin {
   cursor: pointer;
   background-color: #ff7070;
@@ -10134,53 +10950,53 @@ textarea {
   margin-bottom: 10px;
 }
 
-/* line 284, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 512, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .dash-box {
   text-align: center;
 }
 
-/* line 288, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 516, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .show-admin:hover a {
   color: #337AB7;
 }
 
-/* line 292, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 520, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .show-admin a {
   color: white;
 }
 
-/* line 296, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 524, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .show-seller {
   cursor: pointer;
   margin-bottom: 10px;
 }
 
-/* line 301, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 529, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .navbar-default {
   background-color: white;
 }
 
-/* line 305, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 533, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .navbar-nav li a {
   line-height: 75px;
 }
 
-/* line 309, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 537, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .navbar-nav .dropdown li a {
   line-height: 105px;
 }
 
-/* line 313, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 541, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .navbar {
   margin-bottom: 0;
 }
 
-/* line 317, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 545, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .navbar-nav .dropdown .dropdown-menu li a {
   line-height: 20px !important;
 }
 
-/* line 321, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 549, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .nav-username {
   text-align: center;
   padding: 5px;
@@ -10188,50 +11004,50 @@ textarea {
 }
 
 @media (max-width: 767px) {
-  /* line 328, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+  /* line 556, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
   .navbar-nav > li > a {
     line-height: 20px;
   }
 
-  /* line 332, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+  /* line 560, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
   .navbar-header {
     height: 105px;
   }
 
-  /* line 336, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+  /* line 564, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
   .navbar-toggle {
     margin-top: 35px;
   }
 }
-/* line 341, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 569, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .nav-avatar {
   border-radius: 100px;
   -webkit-border-radius: 100px;
   -moz-border-radius: 100px;
 }
 
-/* line 347, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 575, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 #notice_wrapper {
   width: 100%;
   z-index: 999;
   background: rgba(0, 128, 0, 0.85);
 }
 
-/* line 353, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 581, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 #notice_wrapper_alert {
   width: 100%;
   z-index: 999;
   background: #ff7070;
 }
 
-/* line 359, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 587, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 #notice_wrapper_info {
   width: 100%;
   z-index: 999;
   background: rgba(2, 105, 194, 0.85);
 }
 
-/* line 365, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 593, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .notice {
   padding: 1rem 0;
   text-align: center;
@@ -10242,7 +11058,7 @@ textarea {
   letter-spacing: 1px;
 }
 
-/* line 375, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 603, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .alert {
   padding: 1rem 0;
   text-align: center;
@@ -10253,7 +11069,7 @@ textarea {
   letter-spacing: 1px;
 }
 
-/* line 385, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 613, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .info {
   padding: 1rem 0;
   text-align: center;
@@ -10264,30 +11080,30 @@ textarea {
   letter-spacing: 1px;
 }
 
-/* line 395, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 623, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .info p {
   margin: 0;
 }
 
-/* line 399, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 627, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .resend {
   text-decoration: underline;
   color: white;
 }
 
-/* line 404, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 632, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .btn-info {
   background-color: #267ECA;
   border-color: #267ECA;
 }
 
-/* line 409, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 637, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .btn-info:hover {
   background-color: #23527C;
   border-color: #23527C;
 }
 
-/* line 414, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 642, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .conversations1 {
   background-color: white;
   padding: 10px;
@@ -10296,17 +11112,17 @@ textarea {
 }
 
 @media only screen and (max-width: 600px) {
-  /* line 422, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+  /* line 650, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
   .conversation-scroll {
     height: 100px !important;
   }
 }
-/* line 428, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 656, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .conversations1-header {
   margin-bottom: 20px;
 }
 
-/* line 432, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
+/* line 660, /home/kolby/upwork/unique-innovators/app/assets/stylesheets/application.scss */
 .send_message_btn {
   margin-top: -40px;
 }
