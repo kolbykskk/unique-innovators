@@ -53,7 +53,7 @@
   <% unless current_user.bios.count > 0 %>
     <%= form_for bio_path(current_user), method: :post, as: :bio do |f| %>
       <%= f.text_area :description, class: 'form-control' %>
-      <%= f.submit "Save Bio", class: 'btn btn-info butttt' %>
+      <%= f.submit "Save Bio", class: 'btn btn-info buttttt' %>
     <% end %>
   <% else %>
     <%= form_for Bio.find(current_user.bios[0].id), method: :put do |f| %>

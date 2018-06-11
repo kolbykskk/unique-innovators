@@ -21,12 +21,12 @@
 
     <div class="seller col-md-9">
     <% if current_user %>
-      <% if current_user.bios.count > 0 %>
+      <% if @user.bios.count > 0 %>
         <div class="bio">
           <h3 class="page-header">
             <b><%= @user.username %>'s bio</b>
           </h3>
-            <%= current_user.bios[0].description %>
+            <%= @user.bios[0].description %>
         </div>
       <% end %>
     <% end %>
