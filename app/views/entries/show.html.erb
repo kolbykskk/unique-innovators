@@ -2,7 +2,13 @@
   <% if @entry.active == false %>
     <div class="alert alert-info" style="margin-top: 10px;">You must activate this entry before it's entered into the competition.</div>
   <% end %>
-  <h3 class="page-header">Competition Month: <b><%= Competition.competition_name %></b> <span class="badge"><%= pluralize(Competition.find_by(active: true).entries.count, "entry") %></span></h3>
+  <h3 class="page-header">Competition Month: <b><%= Competition.competition_name %></b>
+    <% if Competition.find_by(active: true) %>
+    <span class="badge">
+      <%= pluralize(Competition.find_by(active: true).entries.count, "entry") %>
+    </span>
+    <% end %>
+  </h3>
   <ol class="breadcrumb">
     <li class="entry-link"><%= link_to "All Entries", competition_path(Competition.find_by(active: true).id) %></li>
     <li class="active"><%= @entry.title %></li>

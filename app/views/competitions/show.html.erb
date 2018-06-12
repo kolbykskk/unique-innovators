@@ -30,14 +30,22 @@
             </script>
 
             <button type="submit" class="special-button">
-              Activate
+              <img height="25" src="https://image.ibb.co/mEcUmx/idea_1.png"> Activate
             </button>
         <% end %>
       </div>
       </div>
     </div>
   <% end %>
-  <h3 class="page-header">Competition Month: <b><%= Competition.competition_name %></b> <span class="badge"><%= pluralize(Competition.find_by(active: true).entries.count, "entry") %></span></h3>
+  <% if Competition.find_by(active: true) %>
+    <h3 class="page-header">Competition Month: <b><%= Competition.competition_name %></b>
+      <% if Competition.find_by(active: true) %>
+      <span class="badge">
+        <%= pluralize(Competition.find_by(active: true).entries.count, "entry") %>
+      </span>
+      <% end %>
+    </h3>
+  <% end %>
   <div class="entries">
     <% Entry.where(active: true, competition_id: params[:id]).each do |entry| %>
       <div class="row entry-pending">
